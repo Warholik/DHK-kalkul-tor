@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      background-color: bisque;
+      margin: 0;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+    }
+    .calculatorContainer {
+      display: grid;
+      grid-auto-flow: column;
+      grid-gap: 40px;
+    }
+    .label {
+      display: grid;
+      grid-auto-flow: column;
+    }
+    .slider {
+      display: grid;
+      justify-items: center;
+    }
+  </style>
+  <body>
+    <div class="calculatorContainer">
+      <h1>DH1 - változtatható törlesztőrészlet</h1>
+      <div class="slider">
+        <div class="label">
+          <p>Diákhitel összege &nbsp;</p>
+          <p id="loanAmountLabel"></p>
+        </div>
+        <input id="loanAmountSlider" type="range" min="100000" max="10000000" step="100000" value="500000" />
+      </div>
+      <div class="slider">
+        <div class="label">
+          <p>Törlesztőrészlet &nbsp;</p>
+          <p><span id="installmentLabel"></span></p>
+        </div>
+        <input id="installmentSlider" type="range" min="7200" max="102500" step="5000" value="7200" />
+      </div>
+      <div>
+        <p>Futamidő <span id="monthsLabel"></span></p>
+      </div>
+    </div>
+  </body>
+  <script>
+    /* Init loan amount */
+    var loanAmountLabel = document.getElementById("loanAmountLabel");
+    var loanAmountSlider = document.getElementById("loanAmountSlider");
+    loanAmountLabel.innerText = changeAmountInHUF(loanAmountSlider.value);
+    var loanAmount = loanAmountSlider.value;
+
+    /* Function for changing loan amount*/
+    loanAmountSlider.oninput = function () {
+      loanAmountLabel.innerHTML = changeAmountInHUF(this.value);
+      loanAmount = this.value;
+      calculateLoan();
+    };
+
+    /* Init installment */
+    var installmentLabel = document.getElementById("installmentLabel");
+    var installmentSlider = document.getElementById("installmentSlider");
+    installmentLabel.innerText = changeAmountInHUF(installmentSlider.value);
+    var installment = installmentSlider.value;
+    /* Function for changing loan amount*/
+    installmentSlider.oninput = function () {
+      if (this.value == 7200) {
+        installmentLabel.innerHTML = changeAmountInHUF(this.value);
+        installment = this.value;
+      } else {
+        var installmentRoundValue = Math.round(this.value / 5000) * 5000;
+        installmentLabel.innerHTML = changeAmountInHUF(installmentRoundValue);
+        installment = installmentRoundValue;
+      }
+
+      calculateLoan();
+    };
+
+    /*Init month variables */
+    var months = 1;
+    var monthsLabel = document.getElementById("monthsLabel");
+    monthsLabel.innerText = months;
+
+    /*declare interest and minimum variables */
+    var interest = 0.0199;
+    var paidInstallment = ((interest / 12) * loanAmount * 365) / 360;
+    var debt = Math.ceil(loanAmount - installment + paidInstallment);
+    var repayment = installment - paidInstallment < 0 ? 0 : installment - paidInstallment;
+
+    function calculateLoan() {
+      /*Init the variables */
+      months = 1;
+      paidInstallment = ((interest / 12) * loanAmount * 365) / 360;
+      debt = Math.ceil(loanAmount - installment + paidInstallment);
+      repayment = installment - paidInstallment < 0 ? 0 : installment - paidInstallment;
+
+      while (debt >= 0) {
+        months = months + 1;
+        paidInstallment = ((interest / 12) * debt * 365) / 360;
+        debt = Math.ceil(debt - installment + paidInstallment);
+        repayment = installment - paidInstallment < 0 ? 0 : installment - paidInstallment;
+
+        /* if something gone wrong... */
+        if (months > 1200) {
+          debt = -10;
+        }
+      }
+      if (debt != -10) {
+        monthsLabel.innerText = monthInYYMM(months);
+      } else {
+        monthsLabel.innerHTML = "A futamidő túl hosszú, <br> módosítsa a megadott adatokat!.";
+      }
+     
+    }
+
+    function monthInYYMM(months) {
+      var dateYears = Math.floor(months / 12);
+      var dateMonths = months % 12;
+
+      var formattedMonths = dateYears + " év " + dateMonths + " hónap";
+      return formattedMonths;
+    }
+
+    /*
+     * Set the proper visaual for the money amount
+     * It round up for the nearest integer
+     */
+    function changeAmountInHUF(amout) {
+      return Intl.NumberFormat("hu-HU", {
+        style: "currency",
+        currency: "HUF",
+        minimumFractionDigits: 0,
+      }).format(Math.ceil(amout));
+    }
+
+    calculateLoan();
+  </script>
+</html>
