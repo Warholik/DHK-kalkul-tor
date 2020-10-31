@@ -1,0 +1,117 @@
+.menu-layout {
+  display: grid;
+  grid-template-columns: 1fr 2fr 2fr 1fr;
+  grid-template-areas: "logo menu buttons change";
+  padding-left: 50px;
+  padding-right: 12px;
+  align-self: center;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  height: 120px;
+}
+
+.menu-menus a {
+  height: 40px;
+}
+
+.menu-circle {
+  transition: opacity 0.2s;
+  cursor: pointer;
+}
+
+circle {
+  transition: opacity 0.2s;
+}
+
+.menu-circle:hover circle {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.menu-item {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 23px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.menu-button {
+  display: inline-block;
+  padding-left: 30px;
+  padding-right: 30px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 7px;
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 40px;
+  text-transform: uppercase;
+  text-align: center;
+  color: white;
+  transition: box-shadow 0.2s;
+  cursor: pointer;
+}
+
+.menu-button:hover {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.menu-button--blue {
+  background: #1eade8;
+  margin-right: 22px;
+}
+
+.menu-button--blue:hover {
+  background: linear-gradient(98deg, #0075ca 0%, #1eade8 100%);
+}
+
+.menu-button--green {
+  background: #47a16c;
+}
+
+.menu-button--green:hover {
+  background: linear-gradient(98deg, #10753a 0%, #47a16c 100%);
+}
+
+.menu-buttons,
+.menu-buttons-change,
+.menu-menus {
+  justify-self: end;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+}
+
+.menu-layout img {
+  align-self: center;
+  cursor: pointer;
+}
+
+.menu-menus {
+  justify-self: start;
+}
+
+.menu-buttons-change a {
+  height: 60px;
+}
+
+.menu-dropdown {
+  display: none;
+  gap: 10px;
+  position: absolute;
+  padding-top: 100px;
+  margin-left: 140px;
+}
+
+.menu-dropdown:hover {
+  display: grid;
+}
+
+.menu-button--green:hover + .menu-dropdown {
+  display: grid;
+}
