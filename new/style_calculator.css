@@ -4,7 +4,53 @@ body {
   display: grid;
   align-items: center;
   justify-items: center;
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+.button {
+  display: inline-block;
+  font-family: Source Sans Pro;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 30px;
+  height: 30px;
+  letter-spacing: 0em;
+  text-align: center;
+  text-transform: uppercase;
+  border-radius: 7px;
+  border-width: 0px;
+  color: white !important;
+  padding-left: 30px !important;
+  padding-right: 30px !important;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
+
+.button:hover {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.button--blue {
+  background: #1eade8;
+}
+
+.button--blue:hover {
+  background: linear-gradient(98deg, #0075ca 0%, #1eade8 100%);
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.calculator-outputs {
+  display: grid;
+  justify-items: center;
+  align-items: start;
+  grid-auto-rows: min-content;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
 .calculatorContainer {
   display: grid;
   grid-gap: 20px;
@@ -13,6 +59,8 @@ body {
   filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.25));
   border-radius: 8px;
   padding: 50px;
+  margin-top: 50px;
+  width: 100%;
 }
 .label {
   display: grid;
@@ -33,6 +81,10 @@ body {
   grid-template-areas:
     "title title"
     "number range";
+}
+
+.section-input:first-child {
+  margin-top: 0px;
 }
 
 .section-input h3 {
@@ -92,7 +144,7 @@ input[type="range"]::-webkit-slider-runnable-track {
   height: 20px;
   border: 0;
   border-radius: 50%;
-  background-image: url("slider-diamond.svg");
+  background-image: url("https://dhk.kifli.tech/wp-content/uploads/2020/10/slider_diamond.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -125,7 +177,6 @@ input[type="range"]::-webkit-slider-runnable-track {
   font-size: 14px;
   line-height: 26px;
   text-align: center;
-  font-variant: small-caps;
 }
 .range-value span:before {
   content: "";
@@ -139,4 +190,19 @@ input[type="range"]::-webkit-slider-runnable-track {
   left: 50%;
   margin-left: -10px;
   margin-top: -1px;
+}
+
+.font-bigger {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 24px;
+  text-align: center;
+  color: #333333;
+  margin-top: 0px;
+}
+
+.font-bigger span {
+  color: #1eade8;
 }

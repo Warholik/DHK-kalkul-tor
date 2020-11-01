@@ -99,29 +99,13 @@
         <p class="font-normal">Futamidő: <span id="monthsLabel"></span></p>
       </div>
     </div>
+    <script src="calculatorFunctions.js"></script>
     <script src="GeneralFunctions.js"></script>
     <script>
-      function calculeteValues() {}
-
-      //A csúszka 15e, 21e, 25e, 30e, majd 10.000Ft-ként léptethető 150e-ig.
-      function correctingValueStep(value) {
-        var newValue;
-
-        if (value <= 30000) {
-          if (value <= 15000) {
-            newValue = 15000;
-          } else if (value > 15000 && value <= 21000) {
-            newValue = 21000;
-          } else if (value > 21000 && value <= 25000) {
-            newValue = 25000;
-          } else if (value > 25000 && value <= 30000) {
-            newValue = 30000;
-          }
-        } else {
-          newValue = Math.round(value / 10000) * 10000;
-        }
-        return newValue;
+      function kalkulatorKimenet() {
+        futamidoszamitasa_DH1();
       }
+
 
       function changeInputsValues(input, slider, label) {
         return function () {
@@ -150,7 +134,7 @@
           slider.style.background = `linear-gradient(to right, #1EADE8 0%, #1EADE8 ${sliderPercentageValue}%, #E0E0E0 ${sliderPercentageValue}%, #E0E0E0 100%)`;
           //A Labelre kiírjuk az aktuális értéket
           if (slider.dataset.format == "Ft") {
-            label.innerHTML = `<span>${changeAmountInHUF(correctedValue)}</span>`;
+            label.innerHTML = `<span>${formazasForintra(correctedValue)}</span>`;
           } else {
             label.innerHTML = `<span>${inputValue} Félév</span>`;
           }
@@ -163,32 +147,6 @@
           input.value = correctingValueStep(correctedValue);
         };
       }
-
-      function monthInYYMM(months) {
-        var dateYears = Math.floor(months / 12);
-        var dateMonths = months % 12;
-        var formattedMonths = dateYears + " év " + dateMonths + " hónap";
-        return formattedMonths;
-      }
-
-      /*
-       * Set the proper visaual for the money amount
-       * It round up for the nearest integer
-       */
-      function changeAmountInHUF(amout) {
-        return Intl.NumberFormat("hu-HU", {
-          style: "currency",
-          currency: "HUF",
-          minimumFractionDigits: 0,
-        }).format(Math.ceil(amout));
-      }
-      /*
-       *Bemeneti mezők inicializálása
-       *  Minden véltozónak 2 bemeneti mezője van és egy labelje
-       *  --Az 1. egy  szám típusú bemeneti mező
-       *  --A 2. egy range típusú bemeneti mező
-       *  --A range bemeneti mezőhöz tartozik egy label amelyen látható az értéke.
-       */
 
       //Félévek számához tartozó input mező
       const semesterInput = document.getElementById("semesterInput");

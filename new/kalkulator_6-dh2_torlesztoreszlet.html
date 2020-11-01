@@ -11,15 +11,15 @@
     <div class="calculatorContainer">
       <div>
         <div class="section-input">
-          <h3>Tartozás összege</h3>
+          <h3>Félévenként felvett összeg</h3>
           <input
             class="number"
             id="tartozasBemenet"
             type="number"
             min="100000"
-            max="9000000"
-            step="100000"
-            value="250000"
+            max="1500000"
+            step="20000"
+            value="300000"
             data-format="Ft"
           />
           <div class="range-wrap">
@@ -29,10 +29,36 @@
               id="tartozasSlider"
               type="range"
               min="100000"
-              max="9000000"
-              step="100000"
-              value="250000"
+              max="1500000"
+              step="20000"
+              value="300000"
               data-format="Ft"
+            />
+          </div>
+        </div>
+        <div class="section-input">
+          <h3>Félévek száma</h3>
+          <input
+            class="number"
+            id="felevBemenet"
+            type="number"
+            min="1"
+            max="12"
+            step="1"
+            value="5"
+            data-format="Félév"
+          />
+          <div class="range-wrap">
+            <div class="range-value" id="felevSliderCimke"></div>
+            <input
+              class="range"
+              id="felevSlider"
+              type="range"
+              min="1"
+              max="12"
+              step="1"
+              value="5"
+              data-format="Félév"
             />
           </div>
         </div>
@@ -47,7 +73,7 @@
             max="15"
             step="1"
             value="4"
-            data-format="év"
+            data-format="Év"
           />
           <div class="range-wrap">
             <div class="range-value" id="futamidoSliderCimke"></div>
@@ -59,7 +85,7 @@
               max="15"
               step="1"
               value="4"
-              data-format="év"
+              data-format="Év"
             />
           </div>
         </div>
@@ -67,79 +93,36 @@
       <div class="calculator-outputs">
         <p class="font-bigger">
           Szükséges törlesztőrészlet: <br />
-          <span id="tartozasOsszegeLabel"></span>
+          <span id="torlesztoReszletLabel"></span>
         </p>
         <a class="button button--blue button--calculator">Érdekel</a>
       </div>
     </div>
+    <script src="calculatorFunctions.js"></script>
     <script>
-      var kamat = 0.0199;
-      function torlesztoreszletFutamidoAlapjan() {
-        var honapok = futamidoSlider.value * 12;
-        var tartozasOsszege = tartozasSlider.value;
-        var P = (kamat * 365) / 360 / 12;
-        var q = 1 + P;
-        var qn = Math.pow(q, honapok);
-        var qnminus1 = qn - 1;
+      var kamat = 0.0;
 
-        var torleszto = honapok < 1 ? 0 : Math.ceil((tartozasOsszege * P * qn) / qnminus1);
-        document.getElementById("tartozasOsszegeLabel").innerHTML = formazasForintra(torleszto);
-      }
-
-      function changeInputsValues(input, slider, label) {
-        return function () {
-          //Deklaráljuk a megváltoztatott bemeneti értéket
-          var inputValue;
-          //A bemeneti mező kiválasztása ami okozta a változást
-          if (event.target.type == "number") {
-            //az input mező által elsütött event
-            inputValue = Number(input.value);
-          } else if (event.target.type == "range") {
-            //a slider által elsütött event
-            inputValue = Number(slider.value);
-          } else {
-            //amikor egyik sem igaz akkor a DOMContentLoaded event sül el, az oldal betöltésekor
-            inputValue = Number(slider.value);
-          }
-
-          //a label elcsúsztatásához és a megfelelő háttérszín beállításához szükséges változó
-          //kiszámolja, hogy hány százalékon áll a csúszszka
-          const sliderPercentageValue = Number(((inputValue - slider.min) * 100) / (slider.max - slider.min));
-          const newLabelPosition = 10 - sliderPercentageValue * 0.2;
-          //A slider csúszkájának megfelelő szín beállítása
-          slider.style.background = `linear-gradient(to right, #1EADE8 0%, #1EADE8 ${sliderPercentageValue}%, #E0E0E0 ${sliderPercentageValue}%, #E0E0E0 100%)`;
-          //A Labelre kiírjuk az aktuális értéket
-          if (slider.dataset.format == "Ft") {
-            label.innerHTML = `<span>${formazasForintra(inputValue)}</span>`;
-          } else {
-            label.innerHTML = `<span>${inputValue} év</span>`;
-          }
-
-          //A labelt eltoljuk a megfelelő értékkel
-          label.style.left = `calc(${sliderPercentageValue}% + (${newLabelPosition}px))`;
-
-          //beállítjuk a slidernek és az inputmezőnek a legfrissebben változtatott értékeket
-          slider.value = inputValue;
-          input.value = inputValue;
-          torlesztoreszletFutamidoAlapjan();
-        };
-      }
-
-      /*
-       * Felkerekítjük a legközelebbi egészre a számot
-       * Majd átalakítjuk a HUF valutának megfeleleő kiírásara
-       */
-      function formazasForintra(amout) {
-        return Intl.NumberFormat("hu-HU", {
-          style: "currency",
-          currency: "HUF",
-          minimumFractionDigits: 0,
-        }).format(Math.ceil(amout));
+      function kalkulatorKimenet() {
+        torlesztoreszletFutamidoAlapjanFelevente_DH2();
       }
 
       /*
        *Bemeneti mezők inicializálása
        */
+
+      //Felevek számához tartozó input mező
+      const bruttoBerBemenet = document.getElementById("bruttoBerBemenet");
+      //Félévek számához tartozó slider
+      const bruttoBerSlider = document.getElementById("bruttoBerSlider");
+      //Félévek számához tartozó slider labelje
+      const bruttoBerSliderCimke = document.getElementById("bruttoBerSliderCimke");
+
+      //Felevek számához tartozó input mező
+      const felevBemenet = document.getElementById("felevBemenet");
+      //Félévek számához tartozó slider
+      const felevSlider = document.getElementById("felevSlider");
+      //Félévek számához tartozó slider labelje
+      const felevSliderCimke = document.getElementById("felevSliderCimke");
 
       //Félévek számához tartozó input mező
       const futamidoBemenet = document.getElementById("futamidoBemenet");
@@ -148,16 +131,30 @@
       //Félévek számához tartozó slider labelje
       const futamidoSliderCimke = document.getElementById("futamidoSliderCimke");
 
-      //Félévenként felvett összeghez tartozó input mező
+      //Felvett összeghez tartozó input mező
       const tartozasBemenet = document.getElementById("tartozasBemenet");
-      //Félévenként felvett összeghez tartozó slider
+      //Felvett összeghez tartozó slider
       const tartozasSlider = document.getElementById("tartozasSlider");
-      //Félévenként felvett összegéhez tartozó slider labelje
+      //Felvett összegéhez tartozó slider labelje
       const tartozasSliderCimke = document.getElementById("tartozasSliderCimke");
 
       /*
        *Bemeneti mezőkre a megfelelő függvények meghívása
        */
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
+      );
+      futamidoSlider.addEventListener(
+        "input",
+        changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
+      );
+      futamidoBemenet.addEventListener(
+        "input",
+        changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
+      );
+
       document.addEventListener(
         "DOMContentLoaded",
         changeInputsValues(tartozasBemenet, tartozasSlider, tartozasSliderCimke),
@@ -170,6 +167,10 @@
         "input",
         changeInputsValues(tartozasBemenet, tartozasSlider, tartozasSliderCimke),
       );
+
+      document.addEventListener("DOMContentLoaded", changeInputsValues(felevBemenet, felevSlider, felevSliderCimke));
+      felevBemenet.addEventListener("input", changeInputsValues(felevBemenet, felevSlider, felevSliderCimke));
+      felevSlider.addEventListener("input", changeInputsValues(felevBemenet, felevSlider, felevSliderCimke));
 
       document.addEventListener(
         "DOMContentLoaded",

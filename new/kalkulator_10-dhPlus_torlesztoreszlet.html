@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style_calculator.css" />
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="calculatorContainer">
+      <div>
+        <div class="section-input">
+          <h3>Tartozás összege</h3>
+          <input
+            class="number"
+            id="tartozasBemenet"
+            type="number"
+            min="100000"
+            max="1200000"
+            step="100000"
+            value="250000"
+            data-format="Ft"
+          />
+          <div class="range-wrap">
+            <div class="range-value" id="tartozasSliderCimke"></div>
+            <input
+              class="range"
+              id="tartozasSlider"
+              type="range"
+              min="100000"
+              max="1200000"
+              step="100000"
+              value="250000"
+              data-format="Ft"
+            />
+          </div>
+        </div>
+
+        <div class="section-input">
+          <h3>Futamidő</h3>
+          <input
+            id="futamidoBemenet"
+            class="number"
+            type="number"
+            min="1"
+            max="5"
+            step="1"
+            value="3"
+            data-format="Év"
+          />
+          <div class="range-wrap">
+            <div class="range-value" id="futamidoSliderCimke"></div>
+            <input id="futamidoSlider" class="range" type="range" min="1" max="5" step="1" value="3" data-format="Év" />
+          </div>
+        </div>
+      </div>
+      <div class="calculator-outputs">
+        <p class="font-bigger">
+          Szükséges törlesztőrészlet: <br />
+          <span id="torlesztoReszletLabel"></span>
+        </p>
+        <a class="button button--blue button--calculator">Érdekel</a>
+      </div>
+    </div>
+    <script src="calculatorFunctions.js"></script>
+    <script>
+      var kamat = 0.0;
+
+      function kalkulatorKimenet() {
+        torlesztoreszletFutamidoAlapjan_DH2();
+      }
+
+      /*
+       *Bemeneti mezők inicializálása
+       */
+
+      //Félévek számához tartozó input mező
+      const futamidoBemenet = document.getElementById("futamidoBemenet");
+      //Félévek számához tartozó slider
+      const futamidoSlider = document.getElementById("futamidoSlider");
+      //Félévek számához tartozó slider labelje
+      const futamidoSliderCimke = document.getElementById("futamidoSliderCimke");
+
+      //Felvett összeghez tartozó input mező
+      const tartozasBemenet = document.getElementById("tartozasBemenet");
+      //Felvett összeghez tartozó slider
+      const tartozasSlider = document.getElementById("tartozasSlider");
+      //Felvett összegéhez tartozó slider labelje
+      const tartozasSliderCimke = document.getElementById("tartozasSliderCimke");
+
+      /*
+       *Bemeneti mezőkre a megfelelő függvények meghívása
+       */
+      document.addEventListener(
+        "DOMContentLoaded",
+        changeInputsValues(tartozasBemenet, tartozasSlider, tartozasSliderCimke),
+      );
+      tartozasSlider.addEventListener(
+        "input",
+        changeInputsValues(tartozasBemenet, tartozasSlider, tartozasSliderCimke),
+      );
+      tartozasBemenet.addEventListener(
+        "input",
+        changeInputsValues(tartozasBemenet, tartozasSlider, tartozasSliderCimke),
+      );
+
+      document.addEventListener(
+        "DOMContentLoaded",
+        changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
+      );
+      futamidoSlider.addEventListener(
+        "input",
+        changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
+      );
+      futamidoBemenet.addEventListener(
+        "input",
+        changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
+      );
+    </script>
+  </body>
+</html>

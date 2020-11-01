@@ -38,36 +38,36 @@
         </div>
 
         <div class="section-input">
-          <h3>Futamidő</h3>
+          <h3>Törlesztőrészlet</h3>
           <input
-            id="futamidoBemenet"
+            id="torlesztoRelszletBemenet"
             class="number"
             type="number"
-            min="1"
-            max="15"
-            step="1"
-            value="4"
-            data-format="év"
+            min="10000"
+            max="200000"
+            step="5000"
+            value="40000"
+            data-format="Ft"
           />
           <div class="range-wrap">
-            <div class="range-value" id="futamidoSliderCimke"></div>
+            <div class="range-value" id="torlesztoSliderCimke"></div>
             <input
-              id="futamidoSlider"
+              id="torlesztoSlider"
               class="range"
               type="range"
-              min="1"
-              max="15"
-              step="1"
-              value="4"
-              data-format="év"
+              min="10000"
+              max="200000"
+              step="5000"
+              value="40000"
+              data-format="Ft"
             />
           </div>
         </div>
       </div>
       <div class="calculator-outputs">
         <p class="font-bigger">
-          Szükséges törlesztőrészlet: <br />
-          <span id="tartozasOsszegeLabel"></span>
+          Futamidő: <br />
+          <span id="futamidoLabel"></span>
         </p>
         <a class="button button--blue button--calculator">Érdekel</a>
       </div>
@@ -75,7 +75,7 @@
     <script>
       var kamat = 0.0199;
       function torlesztoreszletFutamidoAlapjan() {
-        var honapok = futamidoSlider.value * 12;
+        var honapok = torlesztoSlider.value * 12;
         var tartozasOsszege = tartozasSlider.value;
         var P = (kamat * 365) / 360 / 12;
         var q = 1 + P;
@@ -83,7 +83,34 @@
         var qnminus1 = qn - 1;
 
         var torleszto = honapok < 1 ? 0 : Math.ceil((tartozasOsszege * P * qn) / qnminus1);
-        document.getElementById("tartozasOsszegeLabel").innerHTML = formazasForintra(torleszto);
+        document.getElementById("futamidoLabel").innerHTML = formazasForintra(torleszto);
+      }
+
+      function futamidoTorlesztoreszletAlapjan() {
+        /*Init the variables */
+        var honapok = 1;
+        var haviTorleszto = torlesztoSlider.value;
+        var fizetettKamat = ((kamat / 12) * tartozasSlider.value * 365) / 360;
+        var toketartozas = Math.ceil(tartozasSlider.value - haviTorleszto + fizetettKamat);
+        var tokeTorlesztes = haviTorleszto - fizetettKamat < 0 ? 0 : haviTorleszto - fizetettKamat;
+
+        while (toketartozas >= 0) {
+          honapok = honapok + 1;
+          fizetettKamat = ((kamat / 12) * toketartozas * 365) / 360;
+          toketartozas = Math.ceil(toketartozas - haviTorleszto + fizetettKamat);
+          tokeTorlesztes = haviTorleszto - fizetettKamat < 0 ? 0 : haviTorleszto - fizetettKamat;
+          console.log(honapok);
+          /* if something gone wrong... */
+          if (honapok > 1500) {
+            toketartozas = -10;
+          }
+        }
+        if (toketartozas != -10) {
+          document.getElementById("futamidoLabel").innerText = monthInYYMM(honapok);
+        } else {
+          document.getElementById("futamidoLabel").innerHTML =
+            "A futamidő túl hosszú, <br> módosítsa a megadott adatokat!";
+        }
       }
 
       function changeInputsValues(input, slider, label) {
@@ -121,7 +148,7 @@
           //beállítjuk a slidernek és az inputmezőnek a legfrissebben változtatott értékeket
           slider.value = inputValue;
           input.value = inputValue;
-          torlesztoreszletFutamidoAlapjan();
+          futamidoTorlesztoreszletAlapjan();
         };
       }
 
@@ -137,16 +164,24 @@
         }).format(Math.ceil(amout));
       }
 
+      function monthInYYMM(months) {
+        var dateYears = Math.floor(months / 12);
+        var dateMonths = months % 12;
+
+        var formattedMonths = dateYears + " év " + dateMonths + " hónap";
+        return formattedMonths;
+      }
+
       /*
        *Bemeneti mezők inicializálása
        */
 
       //Félévek számához tartozó input mező
-      const futamidoBemenet = document.getElementById("futamidoBemenet");
+      const torlesztoRelszletBemenet = document.getElementById("torlesztoRelszletBemenet");
       //Félévek számához tartozó slider
-      const futamidoSlider = document.getElementById("futamidoSlider");
+      const torlesztoSlider = document.getElementById("torlesztoSlider");
       //Félévek számához tartozó slider labelje
-      const futamidoSliderCimke = document.getElementById("futamidoSliderCimke");
+      const torlesztoSliderCimke = document.getElementById("torlesztoSliderCimke");
 
       //Félévenként felvett összeghez tartozó input mező
       const tartozasBemenet = document.getElementById("tartozasBemenet");
@@ -173,15 +208,15 @@
 
       document.addEventListener(
         "DOMContentLoaded",
-        changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
+        changeInputsValues(torlesztoRelszletBemenet, torlesztoSlider, torlesztoSliderCimke),
       );
-      futamidoSlider.addEventListener(
+      torlesztoSlider.addEventListener(
         "input",
-        changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
+        changeInputsValues(torlesztoRelszletBemenet, torlesztoSlider, torlesztoSliderCimke),
       );
-      futamidoBemenet.addEventListener(
+      torlesztoRelszletBemenet.addEventListener(
         "input",
-        changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
+        changeInputsValues(torlesztoRelszletBemenet, torlesztoSlider, torlesztoSliderCimke),
       );
     </script>
   </body>
