@@ -6,22 +6,19 @@ function torlesztoreszletFutamidoAlapjan() {
   var qn = Math.pow(q, honapok);
   var qnminus1 = qn - 1;
 
-  var torleszto =
-    honapok < 1 ? 0 : Math.ceil((tartozasOsszege * P * qn) / qnminus1);
-  document.getElementById("torlesztoReszletLabel").innerHTML = formazasForintra(
-    torleszto
-  );
+  var torleszto = honapok < 1 ? 0 : Math.ceil((tartozasOsszege * P * qn) / qnminus1);
+  document.getElementById("torlesztoReszletLabel").innerHTML = formazasForintra(torleszto);
 }
 
 function torlesztoreszletFutamidoAlapjan_DH2() {
   document.getElementById("torlesztoReszletLabel").innerHTML = formazasForintra(
-    tartozasSlider.value / (futamidoSlider.value * 12)
+    tartozasSlider.value / (futamidoSlider.value * 12),
   );
 }
 
 function torlesztoreszletFutamidoAlapjanFelevente_DH2() {
   document.getElementById("torlesztoReszletLabel").innerHTML = formazasForintra(
-    (tartozasSlider.value * felevSlider.value) / (futamidoSlider.value * 12)
+    (tartozasSlider.value * felevSlider.value) / (futamidoSlider.value * 12),
   );
 }
 
@@ -53,18 +50,14 @@ function futamidoTorlesztoreszletAlapjan() {
   var honapok = 1;
   var haviTorleszto = torlesztoSlider.value;
   var fizetettKamat = ((kamat / 12) * tartozasSlider.value * 365) / 360;
-  var toketartozas = Math.ceil(
-    tartozasSlider.value - haviTorleszto + fizetettKamat
-  );
-  var tokeTorlesztes =
-    haviTorleszto - fizetettKamat < 0 ? 0 : haviTorleszto - fizetettKamat;
+  var toketartozas = Math.ceil(tartozasSlider.value - haviTorleszto + fizetettKamat);
+  var tokeTorlesztes = haviTorleszto - fizetettKamat < 0 ? 0 : haviTorleszto - fizetettKamat;
 
   while (toketartozas >= 0) {
     honapok = honapok + 1;
     fizetettKamat = ((kamat / 12) * toketartozas * 365) / 360;
     toketartozas = Math.ceil(toketartozas - haviTorleszto + fizetettKamat);
-    tokeTorlesztes =
-      haviTorleszto - fizetettKamat < 0 ? 0 : haviTorleszto - fizetettKamat;
+    tokeTorlesztes = haviTorleszto - fizetettKamat < 0 ? 0 : haviTorleszto - fizetettKamat;
     console.log(honapok);
     /* if something gone wrong... */
     if (honapok > 1500) {
@@ -74,64 +67,98 @@ function futamidoTorlesztoreszletAlapjan() {
   if (toketartozas != -10) {
     document.getElementById("futamidoLabel").innerText = monthInYYMM(honapok);
   } else {
-    document.getElementById("futamidoLabel").innerHTML =
-      "A futamidő túl hosszú, <br> módosítsa a megadott adatokat!";
+    document.getElementById("futamidoLabel").innerHTML = "A futamidő túl hosszú, <br> módosítsa a megadott adatokat!";
   }
 }
 
 function futamidoszamitasa_DH1() {
   /*Init the variables */
+  var kamat = 0.0199;
   var minimalber = 120000;
   var torlesztoElsoEv = minimalber * 0.06;
   var jovedelem = wageSlider.value;
-  var torlesztoMasodikEvtol =
-    jovedelem * 0.06 < torlesztoElsoEv ? torlesztoElsoEv : jovedelem * 0.06;
+  var torlesztoMasodikEvtol = jovedelem * 0.06 < torlesztoElsoEv ? torlesztoElsoEv : jovedelem * 0.06;
 
   // első hónap számításai
   var elhataroltHaviKamat = 0;
   var elhataroltKamategyenleg = 0;
+  var havontaFelvettHitel = parseInt(loanAmountSlider.value);
+  var felevekSzama = semesterSlider.value;
 
-  var felevenkentFelvettHitel = parseInt(loanAmountSlider.value);
+  var felevenkentFelvettHitel = havontaFelvettHitel * 5;
   var tokeTartozas = felevenkentFelvettHitel;
-  var felevek = 1;
+  var aktualisFelev = 1;
   var honapok = 1;
 
-  while (semesterSlider.value >= felevek) {
+  console.log("#################### szamitas megkezdese ###################");
+  console.log("Félévenként felvett hitel: " + felevenkentFelvettHitel);
+  console.log("Folyósítandó Hónapok száma : " + felevekSzama);
+  while (felevekSzama >= aktualisFelev) {
     for (i = 1; i <= 6; i++) {
-      elhataroltHaviKamat = (((tokeTartozas * kamat) / 12) * 365) / 360;
+      console.log("tőketartozás: " + tokeTartozas);
+      elhataroltHaviKamat = (((kamat * tokeTartozas) / 12) * 365) / 360;
       elhataroltKamategyenleg = elhataroltKamategyenleg + elhataroltHaviKamat;
+      console.log("Elhatarolt Kamategyenleg: " + elhataroltKamategyenleg);
     }
-    tokeTartozas =
-      tokeTartozas + felevenkentFelvettHitel + elhataroltKamategyenleg;
-    felevek = felevek + 1;
-    console.log(tokeTartozas);
+    console.log(aktualisFelev + " . félév telt el");
+    //ha nem egész évre vesszük fel akkor itt ki kell lépni
+    if (felevekSzama <= aktualisFelev) {
+      tokeTartozas = tokeTartozas + elhataroltKamategyenleg;
+      console.log(
+        "Nem egész éves a konstrukció, végetér a folyósítás, csak az elhatárolt kamategynleget adjuk hozzá: " +
+          tokeTartozas,
+      );
+      break;
+    } else {
+      tokeTartozas = tokeTartozas + felevenkentFelvettHitel;
+      console.log("Féléves folyósítás utáni tartozás : " + tokeTartozas);
+    }
+    aktualisFelev = aktualisFelev + 1;
+    for (i = 1; i <= 6; i++) {
+      console.log("tőketartozás: " + tokeTartozas);
+      elhataroltHaviKamat = (((kamat * tokeTartozas) / 12) * 365) / 360;
+      elhataroltKamategyenleg = elhataroltKamategyenleg + elhataroltHaviKamat;
+      console.log("Elhatarolt Kamategyenleg: " + elhataroltKamategyenleg);
+    }
+    console.log(aktualisFelev + " . félév telt el, ez egy egész év elteltét jelenti");
+    if (felevekSzama == aktualisFelev) {
+      tokeTartozas = tokeTartozas + elhataroltKamategyenleg;
+      console.log("Végetér a folyósítás, csak az elhatárolt kamategynleget adjuk hozzá: " + tokeTartozas);
+    } else {
+      tokeTartozas = tokeTartozas + felevenkentFelvettHitel;
+      console.log("Egész év, összeg folyósítása utáni tartozás: " + tokeTartozas);
+      tokeTartozas = tokeTartozas + elhataroltKamategyenleg;
+      console.log("Elhatárolt kamategyenleg hozzáadása a tőketartozáshoz:" + tokeTartozas);
+      elhataroltKamategyenleg = 0;
+    }
+
+    aktualisFelev = aktualisFelev + 1;
   }
 
   var haviTorleszto = honapok <= 12 ? torlesztoElsoEv : torlesztoMasodikEvtol;
   var fizetettKamat = ((kamat / 12) * tokeTartozas * 365) / 360;
   tokeTartozas = Math.ceil(tokeTartozas - haviTorleszto + fizetettKamat);
-  var tokeTorlesztes =
-    haviTorleszto - fizetettKamat < 0 ? 0 : haviTorleszto - fizetettKamat;
+  var tokeTorlesztes = haviTorleszto - fizetettKamat < 0 ? 0 : haviTorleszto - fizetettKamat;
 
   while (tokeTartozas >= 0) {
     honapok = honapok + 1;
     haviTorleszto = honapok <= 12 ? torlesztoElsoEv : torlesztoMasodikEvtol;
-    fizetettKamat = ((kamat / 12) * tokeTartozas * 365) / 360;
+    fizetettKamat = (((kamat * tokeTartozas) / 12) * 365) / 360;
     tokeTartozas = Math.ceil(tokeTartozas - haviTorleszto + fizetettKamat);
-    tokeTorlesztes =
-      haviTorleszto - fizetettKamat < 0 ? 0 : haviTorleszto - fizetettKamat;
+    tokeTorlesztes = haviTorleszto - fizetettKamat < 0 ? 0 : haviTorleszto - fizetettKamat;
     if (honapok > 15000) {
       tokeTartozas = -10;
     }
   }
-  LoanAmountLabel.innerText = felevenkentFelvettHitel * semesterSlider.value;
+  LoanAmountLabel.innerText = formazasForintra(felevenkentFelvettHitel * felevekSzama);
   monthsLabel.innerText = monthInYYMM(honapok);
-  installment2Label.innerText = torlesztoMasodikEvtol;
+  installment2Label.innerText = formazasForintra(torlesztoMasodikEvtol);
+  document.getElementById("torlesztoreszletElsoEv").innerText = formazasForintra(torlesztoElsoEv);
 }
 
 function futamidoTorlesztoreszletAlapjan_DH2() {
   document.getElementById("futamidoLabel").innerText = monthInYYMM(
-    Math.ceil(tartozasSlider.value / torlesztoSlider.value)
+    Math.ceil(tartozasSlider.value / torlesztoSlider.value),
   );
 }
 
@@ -172,9 +199,7 @@ function changeInputsValues(input, slider, label) {
 
     //a label elcsúsztatásához és a megfelelő háttérszín beállításához szükséges változó
     //kiszámolja, hogy hány százalékon áll a csúszszka
-    const sliderPercentageValue = Number(
-      ((inputValue - slider.min) * 100) / (slider.max - slider.min)
-    );
+    const sliderPercentageValue = Number(((inputValue - slider.min) * 100) / (slider.max - slider.min));
     const newLabelPosition = 10 - sliderPercentageValue * 0.2;
     //A slider csúszkájának megfelelő szín beállítása
     slider.style.background = `linear-gradient(to right, #1EADE8 0%, #1EADE8 ${sliderPercentageValue}%, #E0E0E0 ${sliderPercentageValue}%, #E0E0E0 100%)`;

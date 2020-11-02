@@ -11,7 +11,7 @@
     <div class="calculatorContainer">
       <div>
         <div class="section-input">
-          <h3>Havonta felvett összeg</h3>
+          <h3>Félévenként felvett összeg</h3>
           <input
             class="number"
             id="loanAmountInput"
@@ -94,8 +94,8 @@
       <div class="calculator-outputs">
         <p class="font-bigger">Felvett hitel összege: <span id="LoanAmountLabel"></span></p>
         <p class="font-normal">
-          Törlesztő részlet a első évtől <br />
-          <span id="torlesztoreszletElsoEv"></span>
+          A bérének hány %-a a törlesztőrészlet: <br />
+          <span id="installment1Label">6%</span>
         </p>
         <p class="font-normal">
           Törlesztő részlet a második évtől <br />
@@ -110,8 +110,8 @@
       function kalkulatorKimenet() {
         futamidoszamitasa_DH1();
       }
- 
-      function changeInputsValues_lelptetos(input, slider, label) {
+      var kamat = 0.0199;
+      function changeInputsValues(input, slider, label) {
         return function () {
           //Deklaráljuk a megváltoztatott bemeneti értéket
           var inputValue;
@@ -147,8 +147,8 @@
           label.style.left = `calc(${sliderPercentageValue}% + (${newLabelPosition}px))`;
 
           //beállítjuk a slidernek és az inputmezőnek a legfrissebben változtatott értékeket
-          slider.value = correctedValue;
-          input.value = correctedValue;
+          slider.value = inputValue;
+          input.value = inputValue;
           kalkulatorKimenet();
         };
       }
@@ -176,15 +176,15 @@
 
       document.addEventListener(
         "DOMContentLoaded",
-        changeInputsValues_lelptetos(loanAmountInput, loanAmountSlider, loanAmountSliderV),
+        changeInputsValues(loanAmountInput, loanAmountSlider, loanAmountSliderV),
       );
       loanAmountSlider.addEventListener(
         "input",
-        changeInputsValues_lelptetos(loanAmountInput, loanAmountSlider, loanAmountSliderV),
+        changeInputsValues(loanAmountInput, loanAmountSlider, loanAmountSliderV),
       );
       loanAmountInput.addEventListener(
         "input",
-        changeInputsValues_lelptetos(loanAmountInput, loanAmountSlider, loanAmountSliderV),
+        changeInputsValues(loanAmountInput, loanAmountSlider, loanAmountSliderV),
       );
 
       document.addEventListener("DOMContentLoaded", changeInputsValues(semesterInput, semesterSlider, semesterSliderV));
