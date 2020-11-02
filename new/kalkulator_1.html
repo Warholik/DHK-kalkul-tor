@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style_calculator.css" />
     <title>Document</title>
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="calculatorContainer">
@@ -91,12 +94,21 @@
           </div>
         </div>
       </div>
-
-      <div>
-        <p class="font-bigger">Felvett hitel összege: <span id="LoanAmountLabel"></span></p>
-        <p class="font-normal">A bérének hány %-a a törlesztőrészlet: <span id="installment1Label"></span></p>
-        <p class="font-normal">Törlesztőrészlet: <span id="installment2Label"></span></p>
-        <p class="font-normal">Futamidő: <span id="monthsLabel"></span></p>
+      <div class="calculator-outputs">
+        <p class="font-bigger">
+          Felvett hitel összege: <span id="LoanAmountLabel"></span>
+        </p>
+        <p class="font-normal">
+          A bérének hány %-a a törlesztőrészlet: <br />
+          <span id="installment1Label">6%</span>
+        </p>
+        <p class="font-normal">
+          Törlesztő részlet a második évtől <br />
+          <span id="installment2Label"></span>
+        </p>
+        <p class="font-normal">
+          Futamidő: <br /><span id="monthsLabel"></span>
+        </p>
       </div>
     </div>
     <script src="calculatorFunctions.js"></script>
@@ -105,8 +117,7 @@
       function kalkulatorKimenet() {
         futamidoszamitasa_DH1();
       }
-
-
+      var kamat = 0.0199;
       function changeInputsValues(input, slider, label) {
         return function () {
           //Deklaráljuk a megváltoztatott bemeneti értéket
@@ -125,16 +136,20 @@
           }
 
           correctedValue = correctingValueStep(inputValue);
-          
+
           //a label elcsúsztatásához és a megfelelő háttérszín beállításához szükséges változó
           //kiszámolja, hogy hány százalékon áll a csúszszka
-          const sliderPercentageValue = Number(((inputValue - slider.min) * 100) / (slider.max - slider.min));
+          const sliderPercentageValue = Number(
+            ((inputValue - slider.min) * 100) / (slider.max - slider.min)
+          );
           const newLabelPosition = 10 - sliderPercentageValue * 0.2;
           //A slider csúszkájának megfelelő szín beállítása
           slider.style.background = `linear-gradient(to right, #1EADE8 0%, #1EADE8 ${sliderPercentageValue}%, #E0E0E0 ${sliderPercentageValue}%, #E0E0E0 100%)`;
           //A Labelre kiírjuk az aktuális értéket
           if (slider.dataset.format == "Ft") {
-            label.innerHTML = `<span>${formazasForintra(correctedValue)}</span>`;
+            label.innerHTML = `<span>${formazasForintra(
+              correctedValue
+            )}</span>`;
           } else {
             label.innerHTML = `<span>${inputValue} Félév</span>`;
           }
@@ -145,6 +160,7 @@
           //beállítjuk a slidernek és az inputmezőnek a legfrissebben változtatott értékeket
           slider.value = inputValue;
           input.value = correctingValueStep(correctedValue);
+          kalkulatorKimenet();
         };
       }
 
@@ -171,24 +187,42 @@
 
       document.addEventListener(
         "DOMContentLoaded",
-        changeInputsValues(loanAmountInput, loanAmountSlider, loanAmountSliderV),
+        changeInputsValues(loanAmountInput, loanAmountSlider, loanAmountSliderV)
       );
       loanAmountSlider.addEventListener(
         "input",
-        changeInputsValues(loanAmountInput, loanAmountSlider, loanAmountSliderV),
+        changeInputsValues(loanAmountInput, loanAmountSlider, loanAmountSliderV)
       );
       loanAmountInput.addEventListener(
         "input",
-        changeInputsValues(loanAmountInput, loanAmountSlider, loanAmountSliderV),
+        changeInputsValues(loanAmountInput, loanAmountSlider, loanAmountSliderV)
       );
 
-      document.addEventListener("DOMContentLoaded", changeInputsValues(semesterInput, semesterSlider, semesterSliderV));
-      semesterSlider.addEventListener("input", changeInputsValues(semesterInput, semesterSlider, semesterSliderV));
-      semesterInput.addEventListener("input", changeInputsValues(semesterInput, semesterSlider, semesterSliderV));
+      document.addEventListener(
+        "DOMContentLoaded",
+        changeInputsValues(semesterInput, semesterSlider, semesterSliderV)
+      );
+      semesterSlider.addEventListener(
+        "input",
+        changeInputsValues(semesterInput, semesterSlider, semesterSliderV)
+      );
+      semesterInput.addEventListener(
+        "input",
+        changeInputsValues(semesterInput, semesterSlider, semesterSliderV)
+      );
 
-      document.addEventListener("DOMContentLoaded", changeInputsValues(wageInput, wageSlider, wageSliderV));
-      wageSlider.addEventListener("input", changeInputsValues(wageInput, wageSlider, wageSliderV));
-      wageInput.addEventListener("input", changeInputsValues(wageInput, wageSlider, wageSliderV));
+      document.addEventListener(
+        "DOMContentLoaded",
+        changeInputsValues(wageInput, wageSlider, wageSliderV)
+      );
+      wageSlider.addEventListener(
+        "input",
+        changeInputsValues(wageInput, wageSlider, wageSliderV)
+      );
+      wageInput.addEventListener(
+        "input",
+        changeInputsValues(wageInput, wageSlider, wageSliderV)
+      );
     </script>
   </body>
 </html>

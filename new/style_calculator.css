@@ -203,6 +203,17 @@ input[type="range"]::-webkit-slider-runnable-track {
   margin-top: 0px;
 }
 
-.font-bigger span {
+.font-bigger span,
+.font-normal span {
   color: #1eade8;
+}
+
+.font-normal {
+  font-family: Source Sans Pro;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: center;
 }
