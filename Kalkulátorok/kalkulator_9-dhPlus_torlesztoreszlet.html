@@ -11,7 +11,7 @@
     <div class="calculatorContainer">
       <div>
         <div class="section-input">
-          <h3>Tartozás összege</h3>
+          <h3>Tartozásod összege</h3>
           <input
             class="number"
             id="tartozasBemenet"
@@ -19,7 +19,7 @@
             min="100000"
             max="500000"
             step="100000"
-            value="250000"
+            value="300000"
             data-format="Ft"
           />
           <div class="range-wrap">
@@ -31,7 +31,7 @@
               min="100000"
               max="500000"
               step="100000"
-              value="250000"
+              value="300000"
               data-format="Ft"
             />
           </div>
@@ -57,10 +57,10 @@
       </div>
       <div class="calculator-outputs">
         <p class="font-bigger">
-          Szükséges törlesztőrészlet: <br />
+          Törlesztőrészlet<br />
           <span id="torlesztoReszletLabel"></span>
         </p>
-        <a class="button button--blue button--calculator">Érdekel</a>
+        <a class="buton-calculator buton-calculator--blue button--calculator">Érdekel</a>
       </div>
     </div>
     <script src="calculatorFunctions.js"></script>
@@ -100,8 +100,7 @@
         "input",
         changeInputsValues(tartozasBemenet, tartozasSlider, tartozasSliderCimke),
       );
-      tartozasBemenet.addEventListener(
-        "input",
+      tartozasBemenet.addEventListener("change",
         changeInputsValues(tartozasBemenet, tartozasSlider, tartozasSliderCimke),
       );
 
@@ -113,8 +112,7 @@
         "input",
         changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
       );
-      futamidoBemenet.addEventListener(
-        "input",
+      futamidoBemenet.addEventListener("change",
         changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
       );
     </script>

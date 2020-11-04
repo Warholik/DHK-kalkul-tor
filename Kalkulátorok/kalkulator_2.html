@@ -11,27 +11,27 @@
     <div class="calculatorContainer">
       <div>
         <div class="section-input">
-          <h3>Félévenként felvett összeg</h3>
+          <h3>Havonta felvett összeg</h3>
           <input
             class="number"
-            id="loanAmountInput"
+            id="tartozasInput_2"
             type="number"
             min="15000"
             max="150000"
             step="1000"
-            value="50000"
+            value="80000"
             data-format="Ft"
           />
           <div class="range-wrap">
-            <div class="range-value" id="loanAmountSliderV"></div>
+            <div class="range-value" id="tartozasSliderCimke_2"></div>
             <input
               class="range"
-              id="loanAmountSlider"
+              id="tartozasSlider_2"
               type="range"
               min="15000"
               max="150000"
               step="1000"
-              value="50000"
+              value="80000"
               data-format="Ft"
             />
           </div>
@@ -39,161 +39,97 @@
 
         <div class="section-input">
           <h3>Félévek száma</h3>
-          <input
-            id="semesterInput"
-            class="number"
-            type="number"
-            min="1"
-            max="12"
-            step="1"
-            value="4"
-            data-format="Félév"
-          />
+          <input id="felevInput_2" class="number" type="number" min="1" max="12" step="1" value="6" data-format="Félév" />
           <div class="range-wrap">
-            <div class="range-value" id="semesterSliderV"></div>
+            <div class="range-value" id="felevSliderCimke_2"></div>
             <input
-              id="semesterSlider"
+              id="felevSlider_2"
               class="range"
               type="range"
               min="1"
               max="14"
               step="1"
-              value="4"
+              value="6"
               data-format="Félév"
             />
           </div>
         </div>
 
         <div class="section-input">
-          <h3>Várható havi bruttó bér</h3>
-          <input
-            id="wageInput"
-            class="number"
-            type="number"
-            min="250000"
-            max="1500000"
-            step="50000"
-            value="280000"
-            data-format="Ft"
-          />
+          <h3>Hány év alatt szeretnéd visszafizetni?</h3>
+          <input id="futamidoInput_2" class="number" type="number" min="1" max="15" step="1" value="7" data-format="Év" />
           <div class="range-wrap">
-            <div class="range-value" id="wageSliderV"></div>
+            <div class="range-value" id="futamidoSliderCimke_2"></div>
             <input
-              id="wageSlider"
+              id="futamidoSlider_2"
               class="range"
               type="range"
-              min="250000"
-              max="1500000"
-              step="50000"
-              value="280000"
-              data-format="Ft"
+              min="1"
+              max="15"
+              step="1"
+              value="7"
+              data-format="Év"
             />
           </div>
         </div>
       </div>
       <div class="calculator-outputs">
-        <p class="font-bigger">Felvett hitel összege: <span id="LoanAmountLabel"></span></p>
-        <p class="font-normal">
-          A bérének hány %-a a törlesztőrészlet: <br />
-          <span id="installment1Label">6%</span>
+        <p class="font-normal">Felvett hitel összege<br /> <span id="felvettHitelOsszegeCimke_2"></span></p>
+        <p class="font-bigger">
+          Törlesztőrészlet <br />
+          <span id="torlesztoReszletLabel_2"></span>
         </p>
-        <p class="font-normal">
-          Törlesztő részlet a második évtől <br />
-          <span id="installment2Label"></span>
-        </p>
-        <p class="font-normal">Futamidő: <br /><span id="monthsLabel"></span></p>
+        <a class="buton-calculator buton-calculator--blue button--calculator">Érdekel</a>
       </div>
     </div>
     <script src="calculatorFunctions.js"></script>
-    <script src="GeneralFunctions.js"></script>
     <script>
-      function kalkulatorKimenet() {
-        futamidoszamitasa_DH1();
+      function kalkulatorKimenet_() {
+        torlesztoReszletSzamitasa_DH1();
       }
       var kamat = 0.0199;
-      function changeInputsValues(input, slider, label) {
-        return function () {
-          //Deklaráljuk a megváltoztatott bemeneti értéket
-          var inputValue;
-          var correctedValue;
-          //A bemeneti mező kiválasztása ami okozta a változást
-          if (event.target.type == "number") {
-            //az input mező által elsütött event
-            inputValue = Number(input.value);
-          } else if (event.target.type == "range") {
-            //a slider által elsütött event
-            inputValue = Number(slider.value);
-          } else {
-            //amikor egyik sem igaz akkor a DOMContentLoaded event sül el, az oldal betöltésekor
-            inputValue = Number(slider.value);
-          }
-
-          correctedValue = correctingValueStep(inputValue);
-
-          //a label elcsúsztatásához és a megfelelő háttérszín beállításához szükséges változó
-          //kiszámolja, hogy hány százalékon áll a csúszszka
-          const sliderPercentageValue = Number(((inputValue - slider.min) * 100) / (slider.max - slider.min));
-          const newLabelPosition = 10 - sliderPercentageValue * 0.2;
-          //A slider csúszkájának megfelelő szín beállítása
-          slider.style.background = `linear-gradient(to right, #1EADE8 0%, #1EADE8 ${sliderPercentageValue}%, #E0E0E0 ${sliderPercentageValue}%, #E0E0E0 100%)`;
-          //A Labelre kiírjuk az aktuális értéket
-          if (slider.dataset.format == "Ft") {
-            label.innerHTML = `<span>${formazasForintra(correctedValue)}</span>`;
-          } else {
-            label.innerHTML = `<span>${inputValue} Félév</span>`;
-          }
-
-          //A labelt eltoljuk a megfelelő értékkel
-          label.style.left = `calc(${sliderPercentageValue}% + (${newLabelPosition}px))`;
-
-          //beállítjuk a slidernek és az inputmezőnek a legfrissebben változtatott értékeket
-          slider.value = inputValue;
-          input.value = inputValue;
-          kalkulatorKimenet();
-        };
-      }
 
       //Félévek számához tartozó input mező
-      const semesterInput = document.getElementById("semesterInput");
+      const felevInput_2 = document.getElementById("felevInput_2");
       //Félévek számához tartozó slider
-      const semesterSlider = document.getElementById("semesterSlider");
+      const felevSlider_2 = document.getElementById("felevSlider_2");
       //Félévek számához tartozó slider labelje
-      const semesterSliderV = document.getElementById("semesterSliderV");
+      const felevSliderCimke_2 = document.getElementById("felevSliderCimke_2");
 
       //Bruttó bérhez tartozó input mező
-      const wageInput = document.getElementById("wageInput");
+      const futamidoInput_2 = document.getElementById("futamidoInput_2");
       //Bruttó bérhez tartozó slider
-      const wageSlider = document.getElementById("wageSlider");
+      const futamidoSlider_2 = document.getElementById("futamidoSlider_2");
       //Bruttó bérhez tartozó slider labelje
-      const wageSliderV = document.getElementById("wageSliderV");
+      const futamidoSliderCimke_2 = document.getElementById("futamidoSliderCimke_2");
 
       //Félévenként felvett összeghez tartozó input mező
-      const loanAmountInput = document.getElementById("loanAmountInput");
+      const tartozasInput_2 = document.getElementById("tartozasInput_2");
       //Félévenként felvett összeghez tartozó slider
-      const loanAmountSlider = document.getElementById("loanAmountSlider");
+      const tartozasSlider_2 = document.getElementById("tartozasSlider_2");
       //Félévenként felvett összegéhez tartozó slider labelje
-      const loanAmountSliderV = document.getElementById("loanAmountSliderV");
+      const tartozasSliderCimke_2 = document.getElementById("tartozasSliderCimke_2");
 
       document.addEventListener(
         "DOMContentLoaded",
-        changeInputsValues(loanAmountInput, loanAmountSlider, loanAmountSliderV),
+        changeInputsValues_lelptetos(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2),
       );
-      loanAmountSlider.addEventListener(
+      tartozasSlider_2.addEventListener(
         "input",
-        changeInputsValues(loanAmountInput, loanAmountSlider, loanAmountSliderV),
+        changeInputsValues_lelptetos(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2),
       );
-      loanAmountInput.addEventListener(
-        "input",
-        changeInputsValues(loanAmountInput, loanAmountSlider, loanAmountSliderV),
+      tartozasInput_2.addEventListener(
+        "change",
+        changeInputsValues_lelptetos(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2),
       );
 
-      document.addEventListener("DOMContentLoaded", changeInputsValues(semesterInput, semesterSlider, semesterSliderV));
-      semesterSlider.addEventListener("input", changeInputsValues(semesterInput, semesterSlider, semesterSliderV));
-      semesterInput.addEventListener("input", changeInputsValues(semesterInput, semesterSlider, semesterSliderV));
+      document.addEventListener("DOMContentLoaded", changeInputsValues(felevInput_2, felevSlider_2, felevSliderCimke_2));
+      felevSlider_2.addEventListener("input", changeInputsValues(felevInput_2, felevSlider_2, felevSliderCimke_2));
+      felevInput_2.addEventListener("change", changeInputsValues(felevInput_2, felevSlider_2, felevSliderCimke_2));
 
-      document.addEventListener("DOMContentLoaded", changeInputsValues(wageInput, wageSlider, wageSliderV));
-      wageSlider.addEventListener("input", changeInputsValues(wageInput, wageSlider, wageSliderV));
-      wageInput.addEventListener("input", changeInputsValues(wageInput, wageSlider, wageSliderV));
+      document.addEventListener("DOMContentLoaded", changeInputsValues(futamidoInput_2, futamidoSlider_2, futamidoSliderCimke_2));
+      futamidoSlider_2.addEventListener("input", changeInputsValues(futamidoInput_2, futamidoSlider_2, futamidoSliderCimke_2));
+      futamidoInput_2.addEventListener("change", changeInputsValues(futamidoInput_2, futamidoSlider_2, futamidoSliderCimke_2));
     </script>
   </body>
 </html>

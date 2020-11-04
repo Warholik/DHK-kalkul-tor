@@ -11,27 +11,27 @@
     <div class="calculatorContainer">
       <div>
         <div class="section-input">
-          <h3>Tartozás összege</h3>
+          <h3>Diákhitel tartozásod összege</h3>
           <input
             class="number"
-            id="tartozasBemenet"
+            id="tartozasBemenet_2"
             type="number"
             min="100000"
             max="9000000"
             step="100000"
-            value="250000"
+            value="2400000"
             data-format="Ft"
           />
           <div class="range-wrap">
-            <div class="range-value" id="tartozasSliderCimke"></div>
+            <div class="range-value" id="tartozasSliderCimke_2"></div>
             <input
               class="range"
-              id="tartozasSlider"
+              id="tartozasSlider_2"
               type="range"
               min="100000"
               max="9000000"
               step="100000"
-              value="250000"
+              value="2400000"
               data-format="Ft"
             />
           </div>
@@ -40,25 +40,25 @@
         <div class="section-input">
           <h3>Törlesztőrészlet</h3>
           <input
-            id="torlesztoRelszletBemenet"
+            id="torlesztoRelszletBemenet_2"
             class="number"
             type="number"
             min="10000"
             max="200000"
             step="5000"
-            value="40000"
+            value="30000"
             data-format="Ft"
           />
           <div class="range-wrap">
-            <div class="range-value" id="torlesztoSliderCimke"></div>
+            <div class="range-value" id="torlesztoSliderCimke_2"></div>
             <input
-              id="torlesztoSlider"
+              id="torlesztoSlider_2"
               class="range"
               type="range"
               min="10000"
               max="200000"
               step="5000"
-              value="40000"
+              value="30000"
               data-format="Ft"
             />
           </div>
@@ -66,10 +66,10 @@
       </div>
       <div class="calculator-outputs">
         <p class="font-bigger">
-          Futamidő: <br />
-          <span id="futamidoLabel"></span>
+          Futamidő <br />
+          <span id="futamidoLabel_2"></span>
         </p>
-        <a class="button button--blue button--calculator">Érdekel</a>
+        <a class="buton-calculator buton-calculator--blue button--calculator">Érdekel</a>
       </div>
     </div>
     <script src="calculatorFunctions.js"></script>
@@ -85,46 +85,44 @@
        */
 
       //Félévek számához tartozó input mező
-      const torlesztoRelszletBemenet = document.getElementById("torlesztoRelszletBemenet");
+      const torlesztoRelszletBemenet_2 = document.getElementById("torlesztoRelszletBemenet_2");
       //Félévek számához tartozó slider
-      const torlesztoSlider = document.getElementById("torlesztoSlider");
+      const torlesztoSlider_2 = document.getElementById("torlesztoSlider_2");
       //Félévek számához tartozó slider labelje
-      const torlesztoSliderCimke = document.getElementById("torlesztoSliderCimke");
+      const torlesztoSliderCimke_2 = document.getElementById("torlesztoSliderCimke_2");
 
       //Félévenként felvett összeghez tartozó input mező
-      const tartozasBemenet = document.getElementById("tartozasBemenet");
+      const tartozasBemenet_2 = document.getElementById("tartozasBemenet_2");
       //Félévenként felvett összeghez tartozó slider
-      const tartozasSlider = document.getElementById("tartozasSlider");
+      const tartozasSlider_2 = document.getElementById("tartozasSlider_2");
       //Félévenként felvett összegéhez tartozó slider labelje
-      const tartozasSliderCimke = document.getElementById("tartozasSliderCimke");
+      const tartozasSliderCimke_2 = document.getElementById("tartozasSliderCimke_2");
 
       /*
        *Bemeneti mezőkre a megfelelő függvények meghívása
        */
       document.addEventListener(
         "DOMContentLoaded",
-        changeInputsValues(tartozasBemenet, tartozasSlider, tartozasSliderCimke),
+        changeInputsValues(tartozasBemenet_2, tartozasSlider_2, tartozasSliderCimke_2),
       );
-      tartozasSlider.addEventListener(
+      tartozasSlider_2.addEventListener(
         "input",
-        changeInputsValues(tartozasBemenet, tartozasSlider, tartozasSliderCimke),
+        changeInputsValues(tartozasBemenet_2, tartozasSlider_2, tartozasSliderCimke_2),
       );
-      tartozasBemenet.addEventListener(
-        "input",
-        changeInputsValues(tartozasBemenet, tartozasSlider, tartozasSliderCimke),
+      tartozasBemenet_2.addEventListener("change",
+        changeInputsValues(tartozasBemenet_2, tartozasSlider_2, tartozasSliderCimke_2),
       );
 
       document.addEventListener(
         "DOMContentLoaded",
-        changeInputsValues(torlesztoRelszletBemenet, torlesztoSlider, torlesztoSliderCimke),
+        changeInputsValues(torlesztoRelszletBemenet_2, torlesztoSlider_2, torlesztoSliderCimke_2),
       );
-      torlesztoSlider.addEventListener(
+      torlesztoSlider_2.addEventListener(
         "input",
-        changeInputsValues(torlesztoRelszletBemenet, torlesztoSlider, torlesztoSliderCimke),
+        changeInputsValues(torlesztoRelszletBemenet_2, torlesztoSlider_2, torlesztoSliderCimke_2),
       );
-      torlesztoRelszletBemenet.addEventListener(
-        "input",
-        changeInputsValues(torlesztoRelszletBemenet, torlesztoSlider, torlesztoSliderCimke),
+      torlesztoRelszletBemenet_2.addEventListener("change",
+        changeInputsValues(torlesztoRelszletBemenet_2, torlesztoSlider_2, torlesztoSliderCimke_2),
       );
     </script>
   </body>

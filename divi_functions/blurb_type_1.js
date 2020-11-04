@@ -22,7 +22,7 @@ for (var i = 0; i < blurbs.length; i++) {
 function blurbWithInfo(blurb) {
   var blurbContent = blurb.getElementsByClassName("et_pb_blurb_content")[0];
   var blurbDescription = blurb.getElementsByClassName("et_pb_blurb_description")[0];
-  var infoButton = document.createElement("img");
+  var infoButton= document.createElement("img");
   infoButton.classList.add("tooltip");
   infoButton.src = "/wp-content/uploads/2020/11/i.svg";
   var tooltipText = document.createElement("div");

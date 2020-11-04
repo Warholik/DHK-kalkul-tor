@@ -55,6 +55,7 @@ circle {
   color: white;
   transition: box-shadow 0.2s;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .menu-button:hover {
@@ -104,14 +105,45 @@ circle {
   display: none;
   gap: 10px;
   position: absolute;
-  padding-top: 100px;
+  top: 100px;
   margin-left: 140px;
+  width: 200px;
 }
 
-.menu-dropdown:hover {
+.display {
+  display: block;
+}
+
+.menu-dropdown-list {
+  display: none;
+  position: absolute;
+  top: 80px;
+  width: 160px;
+  text-align: center;
+
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 8px;
+  padding: 5px;
+  font-size: 18px;
+  line-height: 40px;
+  font-family: Source Sans Pro;
+  font-weight: 600;
+}
+.menu-dropdown-list a {
+  height: 40px;
+  text-decoration: none;
+  color: #333333;
+}
+.menu-dropdown-list a:hover {
+  color: #1eade8;
+  cursor: pointer;
+}
+
+.menu-dropdown-list:hover {
   display: grid;
 }
 
-.menu-button--green:hover + .menu-dropdown {
+.felvettem:hover + .menu-dropdown-list {
   display: grid;
 }

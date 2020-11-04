@@ -11,7 +11,7 @@
     <div class="calculatorContainer">
       <div>
         <div class="section-input">
-          <h3>Tartozás összege</h3>
+          <h3>Diákhitel tartozásod összege</h3>
           <input
             class="number"
             id="tartozasBemenet"
@@ -19,7 +19,7 @@
             min="100000"
             max="16200000"
             step="100000"
-            value="250000"
+            value="2200000"
             data-format="Ft"
           />
           <div class="range-wrap">
@@ -31,7 +31,7 @@
               min="100000"
               max="16200000"
               step="100000"
-              value="250000"
+              value="2200000"
               data-format="Ft"
             />
           </div>
@@ -46,7 +46,7 @@
             min="1"
             max="15"
             step="1"
-            value="4"
+            value="7"
             data-format="Ft"
           />
           <div class="range-wrap">
@@ -58,7 +58,7 @@
               min="1"
               max="15"
               step="1"
-              value="4"
+              value="7"
               data-format="Év"
             />
           </div>
@@ -66,10 +66,10 @@
       </div>
       <div class="calculator-outputs">
         <p class="font-bigger">
-          Szükséges törlesztőrészlet: <br />
+          Szükséges törlesztőrészlet<br />
           <span id="torlesztoReszletLabel"></span>
         </p>
-        <a class="button button--blue button--calculator">Érdekel</a>
+        <a class="buton-calculator buton-calculator--blue button--calculator">Érdekel</a>
       </div>
     </div>
     <script src="calculatorFunctions.js"></script>
@@ -109,8 +109,7 @@
         "input",
         changeInputsValues(tartozasBemenet, tartozasSlider, tartozasSliderCimke),
       );
-      tartozasBemenet.addEventListener(
-        "input",
+      tartozasBemenet.addEventListener("change",
         changeInputsValues(tartozasBemenet, tartozasSlider, tartozasSliderCimke),
       );
 
@@ -122,8 +121,7 @@
         "input",
         changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
       );
-      futamidoBemenet.addEventListener(
-        "input",
+      futamidoBemenet.addEventListener("change",
         changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke),
       );
     </script>
