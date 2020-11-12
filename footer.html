@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /*
+*** FOOTER ***
+*/
+      .footer {
+        display: grid;
+        grid-template-rows: 1fr 1fr;
+      }
+
+      .footer__szoveg,
+      .footer__link {
+        margin: 0;
+        text-decoration: none;
+      }
+
+      .footer__sor {
+        display: grid;
+        grid-template-columns: 1fr 5fr 5fr 1fr;
+        grid-template-areas: ". elso masodik fel";
+      }
+
+      .footer__kep--logo {
+        grid-area: elso;
+        align-self: center;
+      }
+      .footer__sor--belso {
+        grid-area: masodik;
+        display: grid;
+        grid-auto-flow: column;
+        align-self: center;
+        justify-self: end;
+        grid-column-gap: 20px;
+      }
+
+      .footer__sor--belso--jogi {
+        grid-area: elso;
+        justify-self: start;
+      }
+
+      .footer__link {
+        font-family: Source Sans Pro;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 18px;
+        line-height: 23px;
+        color: #333333;
+      }
+
+      .footer__szoveg {
+        font-family: Source Sans Pro;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 14px;
+        line-height: 18px;
+        color: #ffffff;
+      }
+
+      .footer__kep--mfb {
+        justify-self: end;
+        align-self: center;
+        grid-area: masodik;
+      }
+
+      .footer__kep--oldalteteje {
+        grid-area: fel;
+        justify-self: center;
+      }
+
+      .hatter--kek {
+        background-color: #1eade8;
+      }
+
+      @media only screen and (max-width: 980px) {
+        .footer {
+          grid-template-columns: 1fr;
+        }
+
+        .footer__sor {
+          padding: 5%;
+          grid-template-columns: 1fr;
+          grid-template-rows: 1fr 1fr;
+          grid-template-areas:
+            "elso"
+            "masodik"
+            "fel";
+        }
+        .footer__sor--belso {
+          grid-auto-flow: row;
+          justify-self: start;
+          grid-row-gap: 10px;
+        }
+
+        .footer__kep--mfb {
+          justify-self: start;
+          margin-top: 20px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="footer">
+      <div class="footer__sor">
+        <a href="/" class="footer__kep--logo"> <img src="dhk_logo.svg" /></a>
+        <div class="footer__sor--belso">
+          <a href="/elerhetoseg/" class="footer__link">Elérhetőségek</a>
+          <a href="/rolunk/" class="footer__link">Rólunk</a>
+          <a href="/kozerdeku-adatok/" class="footer__link">Közérdekű adatok</a>
+        </div>
+      </div>
+      <div class="footer__sor hatter--kek">
+        <div class="footer__sor--belso footer__sor--belso--jogi">
+          <p class="footer__szoveg">Copyright © 2017 Diákhitel Központ Zrt.</p>
+          <a class="footer__szoveg" href="/jogi-nyilatkozat/"> Jogi nyilatkozat </a>
+        </div>
+        <a href="https://www.mfb.hu/" class="footer__kep--mfb"><img src="mfb.svg" /></a>
+        <a href="#oldal-teteje" class="footer__kep--oldalteteje"><img src="up.svg" /></a>
+      </div>
+    </div>
+  </body>
+</html>

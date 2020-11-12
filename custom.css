@@ -1,24 +1,6 @@
 #main-footer {
   display: none;
 }
-
-.footer-linkek a {
-  color: #333333 !important;
-  padding-left: 15px;
-}
-
-@media only screen and (max-width: 980px) {
-  .footer-linkek a {
-    padding-right: 15px;
-    padding-left: 0px;
-  }
-}
-
-.footer-szoveg a {
-  color: white;
-  padding-left: 15px;
-}
-
 /* Két oszlop mobil nézetben */
 @media only screen and (max-width: 980px) {
   .two-columns .et_pb_column {
@@ -28,6 +10,10 @@
 
 h2 {
   font-variant: small-caps;
+}
+
+.center {
+  margin: auto;
 }
 
 .et_pb_section,
@@ -749,7 +735,7 @@ h2 {
 }
 .kereses-igenyles__lista a {
   width: 100%;
-  margin-left: 120px;
+  padding-left: 120px;
   padding-top: 10px;
   font-family: Source Sans Pro;
   font-weight: 600;
@@ -762,8 +748,8 @@ h2 {
   .kereses-igenyles {
     grid-template-columns: 50px auto;
   }
-  .kereses-igenyles__lista a{
-    margin-left: 50px;
+  .kereses-igenyles__lista a {
+    padding-left: 50px;
   }
 }
 
@@ -1202,10 +1188,6 @@ circle {
   color: white;
 }
 
-.center {
-  margin: auto;
-}
-
 .sign-up-form .form-input:focus {
   border: none;
 }
@@ -1260,5 +1242,104 @@ circle {
 @media only screen and (max-width: 980px) {
   .blurb--image-header .et_pb_blurb_container {
     padding-left: 0px !important;
+  }
+}
+
+/*
+*** FOOTER ***
+*/
+.footer {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.footer__szoveg,
+.footer__link {
+  margin: 0;
+  text-decoration: none;
+}
+
+.footer__sor {
+  display: grid;
+  grid-template-columns: 1fr 5fr 5fr 1fr;
+  grid-template-areas: ". elso masodik fel";
+  min-height: 60px;
+}
+
+.footer__kep--logo {
+  grid-area: elso;
+  align-self: center;
+}
+.footer__sor--belso {
+  grid-area: masodik;
+  display: grid;
+  grid-auto-flow: column;
+  align-self: center;
+  justify-self: end;
+  grid-column-gap: 20px;
+}
+
+.footer__sor--belso--jogi {
+  grid-area: elso;
+  justify-self: start;
+}
+
+.footer__link {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 23px;
+  color: #333333;
+}
+
+.footer__szoveg {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
+  color: #ffffff;
+}
+
+.footer__kep--mfb {
+  justify-self: end;
+  align-self: center;
+  grid-area: masodik;
+}
+
+.footer__kep--oldalteteje {
+  grid-area: fel;
+  justify-self: center;
+  margin-top: -40px;
+}
+
+.hatter--kek {
+  background-color: #1eade8;
+}
+
+@media only screen and (max-width: 980px) {
+  .footer {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__sor {
+    padding: 5%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "elso"
+      "masodik"
+      "fel";
+  }
+  .footer__sor--belso {
+    grid-auto-flow: row;
+    justify-self: start;
+    grid-row-gap: 10px;
+  }
+
+  .footer__kep--mfb {
+    justify-self: start;
+    margin-top: 20px;
   }
 }
