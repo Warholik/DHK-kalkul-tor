@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style_calculator.css" />
+    <link rel="stylesheet" href="custom.css" />
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" />
   </head>
@@ -11,15 +11,15 @@
     <div class="calculatorContainer">
       <div>
         <div class="section-input">
-          <h3>Diákhitel tartozásod összege</h3>
+          <h3>Tartozásod összege</h3>
           <input
             class="number"
             id="tartozasBemenet"
             type="number"
             min="100000"
-            max="9000000"
+            max="1200000"
             step="100000"
-            value="2400000"
+            value="600000"
             data-format="Ft"
           />
           <div class="range-wrap">
@@ -29,9 +29,9 @@
               id="tartozasSlider"
               type="range"
               min="100000"
-              max="9000000"
+              max="1200000"
               step="100000"
-              value="2400000"
+              value="600000"
               data-format="Ft"
             />
           </div>
@@ -44,40 +44,35 @@
             class="number"
             type="number"
             min="1"
-            max="15"
+            max="5"
             step="1"
-            value="7"
-            data-format="Ft"
+            value="3"
+            data-format="Év"
           />
           <div class="range-wrap">
             <div class="range-value" id="futamidoSliderCimke"></div>
-            <input
-              id="futamidoSlider"
-              class="range"
-              type="range"
-              min="1"
-              max="15"
-              step="1"
-              value="7"
-              data-format="Év"
-            />
+            <input id="futamidoSlider" class="range" type="range" min="1" max="5" step="1" value="3" data-format="Év" />
           </div>
         </div>
       </div>
       <div class="calculator-outputs">
         <p class="font-bigger">
-          Szükséges törlesztőrészlet <br />
-          <span id="torlesztoReszletLabel"></span>
+          Törlesztőrészlet<br />
+          <span id="torlesztoReszletCimke"></span>
         </p>
-        <a class="buton-calculator buton-calculator--blue button--calculator">Érdekel</a>
+        <a
+          href="https://diakhitelplusz.diakhiteldirekt.hu/hiteligenyles"
+          class="buton-calculator buton-calculator--blue button--calculator"
+          >Érdekel</a
+        >
       </div>
     </div>
     <script src="calculatorFunctions.js"></script>
     <script>
-      var kamat = 0.0199;
+      var kamat = 0.0;
 
       function kalkulatorKimenet() {
-        torlesztoreszletFutamidoAlapjan();
+        torlesztoreszletFutamidoAlapjan_DH2();
       }
 
       /*
@@ -91,11 +86,11 @@
       //Félévek számához tartozó slider labelje
       const futamidoSliderCimke = document.getElementById("futamidoSliderCimke");
 
-      //Félévenként felvett összeghez tartozó input mező
+      //Felvett összeghez tartozó input mező
       const tartozasBemenet = document.getElementById("tartozasBemenet");
-      //Félévenként felvett összeghez tartozó slider
+      //Felvett összeghez tartozó slider
       const tartozasSlider = document.getElementById("tartozasSlider");
-      //Félévenként felvett összegéhez tartozó slider labelje
+      //Felvett összegéhez tartozó slider labelje
       const tartozasSliderCimke = document.getElementById("tartozasSliderCimke");
 
       /*

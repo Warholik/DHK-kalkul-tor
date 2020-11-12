@@ -3,14 +3,12 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style_calculator.css" />
+    <link rel="stylesheet" href="custom.css" />
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" />
     <script src="calculatorFunctions.js"></script>
 
-    <style>
-   
-    </style>
+    <style></style>
   </head>
   <body>
     <div>
@@ -210,7 +208,7 @@
             </p>
             <p class="font-bigger">
               Törlesztőrészlet <br />
-              <span id="torlesztoReszletLabel_2"></span>
+              <span id="torlesztoReszletCimke_2"></span>
             </p>
             <a href="/igenyles/ " class="buton-calculator buton-calculator--blue button--calculator">Érdekel</a>
           </div>
@@ -265,15 +263,15 @@
 
       document.addEventListener(
         "DOMContentLoaded",
-        changeInputsValues_lelptetos(tartozasInput, tartozasSlider, tartozasSliderCimke),
+        changeInputsValues(tartozasInput, tartozasSlider, tartozasSliderCimke,true),
       );
       tartozasSlider.addEventListener(
         "input",
-        changeInputsValues_lelptetos(tartozasInput, tartozasSlider, tartozasSliderCimke),
+        changeInputsValues(tartozasInput, tartozasSlider, tartozasSliderCimke,true),
       );
       tartozasInput.addEventListener(
         "change",
-        changeInputsValues_lelptetos(tartozasInput, tartozasSlider, tartozasSliderCimke),
+        changeInputsValues(tartozasInput, tartozasSlider, tartozasSliderCimke,true),
       );
 
       document.addEventListener("DOMContentLoaded", changeInputsValues(felevInput, felevSlider, felevSliderCimke));
@@ -313,15 +311,15 @@
 
       document.addEventListener(
         "DOMContentLoaded",
-        changeInputsValues_lelptetos(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2),
+        changeInputsValues(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2, true),
       );
       tartozasSlider_2.addEventListener(
         "input",
-        changeInputsValues_lelptetos(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2),
+        changeInputsValues(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2, true),
       );
       tartozasInput_2.addEventListener(
         "change",
-        changeInputsValues_lelptetos(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2),
+        changeInputsValues(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2, true),
       );
 
       document.addEventListener(
