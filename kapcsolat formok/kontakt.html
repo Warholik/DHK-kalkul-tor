@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style_calculator.css" />
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" />
+    <script src="calculatorFunctions.js"></script>
+
+    <style></style>
+  </head>
+  <body>
+    <div>
+      <div class="tab">
+        <button class="tablinks" onclick="tabValtas(event, 'form_1')" id="defaultOpen">Ügyfeleknek</button>
+        <button class="tablinks" onclick="tabValtas(event, 'form_2')">Érdeklődőknek</button>
+      </div>
+      <div class="tabcontent" id="form_1">
+        <div class="calculatorContainer">[wpforms id="152"]</div>
+      </div>
+      <div class="tabcontent" id="form_2" style="display: none">
+        <div class="calculatorContainer">[wpforms id="5611"]</div>
+      </div>
+    </div>
+    <script>
+      function tabValtas(evt, kalkulator) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(kalkulator).style.display = "block";
+        evt.currentTarget.className += " active";
+      }
+
+      // Get the element with id="defaultOpen" and click on it
+      document.getElementById("defaultOpen").click();
+    </script>
+    <script></script>
+
+    <script>
+
+    </script>
+  </body>
+</html>

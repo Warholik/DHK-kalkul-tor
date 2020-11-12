@@ -1,3 +1,6 @@
+//
+//Kalkulátor funkcionalitása
+//
 function torlesztoreszletFutamidoAlapjan() {
   var honapok = futamidoSlider.value * 12;
   var tartozasOsszege = tartozasSlider.value;
@@ -235,7 +238,9 @@ function torlesztoReszletSzamitasa_DH1() {
 
   var torleszto = honapok < 1 ? 0 : Math.ceil((tartozasOsszege * P * qn) / qnminus1);
   document.getElementById("torlesztoReszletLabel_2").innerHTML = formazasForintra(torleszto);
-  document.getElementById("felvettHitelOsszegeCimke_2").innerText = formazasForintra(felevenkentFelvettHitel * felevekSzama);
+  document.getElementById("felvettHitelOsszegeCimke_2").innerText = formazasForintra(
+    felevenkentFelvettHitel * felevekSzama,
+  );
 }
 
 function futamidoTorlesztoreszletAlapjan_DH2() {
@@ -262,8 +267,6 @@ function monthInYYMM(months) {
   var formattedMonths = dateYears + " év " + dateMonths + " hónap";
   return formattedMonths;
 }
-
-
 
 function changeInputsValues(input, slider, label) {
   return function () {

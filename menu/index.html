@@ -7,13 +7,10 @@
     <title>Document</title>
   </head>
   <body>
-    <div class="menu-layout" id="oldal-teteje">
+    <span id="oldal-teteje"></span>
+    <div class="menu-layout" id="desktop-menu-nezet">
       <a style="display: grid" href="/">
-        <img
-          id="menuLogo"
-          src="https://dhk.kifli.tech/wp-content/uploads/2020/11/diakhitel_logo.svg"
-          alt="Diákhitel logó"
-          href="/"
+        <img id="menuLogo_desktop" src="/wp-content/uploads/2020/11/diakhitel_logo.svg" alt="Diákhitel logó" href="/"
       /></a>
       <div class="menu-menus">
         <a id="felvettemGomb" class="felvettem">
@@ -39,9 +36,10 @@
           </svg>
         </a>
         <div class="menu-dropdown-list" id="menu-dropdown-list">
-          <a href="/felvettem-diakhitel1/">Diakhitel 1 </a>
-          <a href="/felvettem-diakhitel2/">Diakhitel 2 </a>
-          <a href="/felvettem-diakhitelplusz-struktura/">Diakhitel Plusz </a>
+          <a href="/felvettem-diakhitel1/">Diakhitel1 </a>
+          <a href="/felvettem-diakhitel2/">Diakhitel2 </a>
+          <a href="/felvettem-diakhitelplusz/">Diákhite Plusz (felsőoktatás)</a>
+          <a href="/felvettem-diakhitelplusz-struktura/">Diákhitel Plusz (struktúraváltó képzés)</a>
         </div>
         <a id="szuloknekGomb" href="/szuloknek/">
           <svg
@@ -64,44 +62,68 @@
         <a class="menu-button menu-button--blue" href="https://www.diakhiteldirekt.hu/"> BELÉPÉS</a>
         <a class="menu-button menu-button--green" onclick="lenyiloMenu()"> IGÉNYLÉS</a>
         <div class="menu-dropdown" id="menu-dropdown">
-          <a href="/igenyles/"><img src="https://dhk.kifli.tech/wp-content/uploads/2020/11/menu_dh_1.svg" /></a>
-          <a href="/igenyles/"><img src="https://dhk.kifli.tech/wp-content/uploads/2020/11/menu_dh_2.svg" /></a>
+          <a href="/igenyles/"><img src="/wp-content/uploads/2020/11/menu_dh_1.svg" /></a>
+          <a href="/igenyles/"><img src="/wp-content/uploads/2020/11/menu_dh_2.svg" /></a>
           <a href="https://diakhitelplusz.diakhiteldirekt.hu/hiteligenyles">
-            <img src="https://dhk.kifli.tech/wp-content/uploads/2020/11/menu_dh_plusz.svg" />
+            <img src="/wp-content/uploads/2020/11/menu_dh_plusz.svg" />
           </a>
         </div>
       </div>
       <div class="menu-buttons-change">
-        <a class="">
-          <img src="https://dhk.kifli.tech/wp-content/uploads/2020/11/en.svg" alt="Angol nyelvre váltás" />
+        <a href="/english-page/" class="">
+          <img src="/wp-content/uploads/2020/11/en.svg" alt="Angol nyelvre váltás" />
         </a>
-        <a class="">
-          <img src="https://dhk.kifli.tech/wp-content/uploads/2020/11/disabled.svg" alt="Akadálymentesített felület"
+        <a href="" id="akadalymentesLink_desktop" class="">
+          <img src="/wp-content/uploads/2020/11/disabled.svg" alt="Akadálymentesített felület"
         /></a>
       </div>
     </div>
-    <script>
-      function lenyiloMenu() {
-        document.getElementById("menu-dropdown").classList.toggle("display");
-      }
+    <!--mobile menü nézet -->
+    <div class="menu-layout" id="mobil-menu-nezet">
+      <a class="logo" href="/">
+        <img id="menuLogo_mobil" src="/wp-content/uploads/2020/11/diakhitel_logo.svg" alt="Diákhitel logó" href="/"
+      /></a>
 
-      function logoAutomatikusValtas() {
-        var menuLogo = document.getElementById("menuLogo");
-        console.log(window.location.href);
-        if (window.location.href.includes("diakhitel1")) {
-          console.log("diakhitel1");
-          menuLogo.src = "https://dhk.kifli.tech/wp-content/uploads/2020/11/diakhitel_1_logo.svg";
-        } else if (window.location.href.includes("diakhitel2")) {
-          console.log("diakhitel2");
-          menuLogo.src = "https://dhk.kifli.tech/wp-content/uploads/2020/11/diakhitel_2_logo.svg";
-        } else if (window.location.href.includes("diakhitelplusz")) {
-          console.log("diakhitelplusz");
-          menuLogo.src = "https://dhk.kifli.tech/wp-content/uploads/2020/11/diakhitel_plusz_logo.svg";
-        } else {
-          console.log("nop");
-          menuLogo.src = "https://dhk.kifli.tech/wp-content/uploads/2020/11/diakhitel_logo.svg";
-        }
-      }
+      <div id="menu-btn" class="menu-btn hamburger">
+        <div id="nav-hamburger-icon">
+          <span class="hamburger-icon-row"></span>
+          <span class="hamburger-icon-row"></span>
+          <span class="hamburger-icon-row"></span>
+          <span class="hamburger-icon-row"></span>
+        </div>
+      </div>
+      <a href="" id="akadalymentesLink_mobil" class="akadalymentes">
+        <img src="/wp-content/uploads/2020/11/disabled.svg" alt="Akadálymentesített felület" />
+      </a>
+      <div class="menu-buttons">
+        <a class="menu-button menu-button--blue" href="https://www.diakhiteldirekt.hu/"> BELÉPÉS</a>
+        <a class="menu-button menu-button--green" onclick="lenyiloMenu()"> IGÉNYLÉS</a>
+        <div class="menu-dropdown" id="menu-dropdown2">
+          <a href="/igenyles/"><img src="/wp-content/uploads/2020/11/menu_dh_1.svg" /></a>
+          <a href="/igenyles/"><img src="/wp-content/uploads/2020/11/menu_dh_2.svg" /></a>
+          <a href="https://diakhitelplusz.diakhiteldirekt.hu/hiteligenyles">
+            <img src="/wp-content/uploads/2020/11/menu_dh_plusz.svg" />
+          </a>
+        </div>
+      </div>
+      <div class="sub-menu" id="sub-menu">
+        <a class="szuloknek" id="szuloknekGomb" href="/szuloknek/"> Szülőknek </a>
+        <a id="felvettemGomb_mobil" class="felvettem"> Felvettem </a>
+        <div class="felvettem-almenu" id="menu-dropdown-list-mobil">
+          <a href="/felvettem-diakhitel1/">Diakhitel1 </a>
+          <a href="/felvettem-diakhitel2/">Diakhitel2 </a>
+          <a href="/felvettem-diakhitelplusz/">Diákhite Plusz (felsőoktatás)</a>
+          <a href="/felvettem-diakhitelplusz-struktura/">Diákhitel Plusz (struktúraváltó képzés)</a>
+        </div>
+        <div class="egyebek">
+          <a href="/elerhetoseg/">Elérhetőségek</a>
+          <a href="/rolunk/">Rólunk</a>
+          <a href="/kozerdeku-adatok/"> Közérdekű adatok</a>
+          <a href="/english-page/" class="english"> English </a>
+        </div>
+      </div>
+    </div>
+    <script>
       var felvettemMenuAktiv =
         '<svg class="menu-circle" width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">' +
         '<circle opacity="0.3" cx="79.5" cy="34.5" r="2.5" fill="#333333" />' +
@@ -139,8 +161,71 @@
         }
       }
 
+      document.getElementById("nav-hamburger-icon").onclick = function () {
+        document.getElementById("nav-hamburger-icon").classList.toggle("open");
+        document.getElementById("sub-menu").classList.toggle("release");
+      };
+
+      document.getElementById("felvettemGomb_mobil").onclick = function () {
+        document.getElementById("menu-dropdown-list-mobil").classList.toggle("release");
+      };
+
+      function lenyiloMenu() {
+        document.getElementById("menu-dropdown").classList.toggle("display");
+        document.getElementById("menu-dropdown2").classList.toggle("display");
+      }
+
+      function logoAutomatikusValtas() {
+        var menuLogo_desktop = document.getElementById("menuLogo_desktop");
+        var menuLogo_mobil = document.getElementById("menuLogo_mobil");
+        if (window.location.href.includes("diakhitel1")) {
+          menuLogo_desktop.src = "/wp-content/uploads/2020/11/diakhitel_1_logo.svg";
+          menuLogo_mobil.src = "/wp-content/uploads/2020/11/diakhitel_1_logo.svg";
+        } else if (window.location.href.includes("diakhitel2")) {
+          menuLogo_desktop.src = "/wp-content/uploads/2020/11/diakhitel_2_logo.svg";
+          menuLogo_mobil.src = "/wp-content/uploads/2020/11/diakhitel_2_logo.svg";
+        } else if (window.location.href.includes("plusz")) {
+          menuLogo_desktop.src = "/wp-content/uploads/2020/11/diakhitel_plusz_logo.svg";
+          menuLogo_mobil.src = "/wp-content/uploads/2020/11/diakhitel_plusz_logo.svg";
+        } else {
+          menuLogo_desktop.src = "/wp-content/uploads/2020/11/diakhitel_logo.svg";
+          menuLogo_mobil.src = "/wp-content/uploads/2020/11/diakhitel_logo.svg";
+        }
+      }
+      var linkek = {
+        "/": "/fooldal-akadalymentesitett",
+        "/diakhitel-plusz/": "/diakhitel-plusz-akadalymentesitett",
+        "/diakhitel-plusz-strukturavalto-kepzes/": "/diakhitel-plusz-strukturavalto-kepzes-akadalymentesitett",
+        "/diakhitel1/": "/diakhitel1-akadalymentesitett",
+        "/diakhitel2/": "/diakhitel2-akadalymentesitett/",
+        "/elerhetoseg/": "/elerhetoseg-akadalymentesitett/",
+        "/english-page/": "/english-page-akadalymentesitett/",
+        "/felvettem-diakhitel1/": "/felvettem-diakhitel1-akadalymentesitett/",
+        "/elvettem-diakhitel2/": "/elvettem-diakhitel2-akadalymentesitett/",
+        "/felvettem-diakhitelplusz-struktura/": "/felvettem-diakhitelplusz-struktura-akadalymentesitett/",
+        "/igenyles/": "/igenyles-akadalymentesitett",
+        "/rolunk/": "/rolunk-akadalymentesitett",
+        "/szuloknek/": "/szuloknek-akadalymentesitett/",
+        "/ut-valaszto/": "/ut-valaszto-akadalymentesitett/",
+        "/ut-valaszto-2/": "/ut-valaszto-2-akadalymentesitett/",
+        "/ut-valaszto-3/": "/ut-valaszto-3-akadalymentesitett/",
+        "/ut-valaszto-4/": "/ut-valaszto-4-akadalymentesitett/",
+      };
+      function akadalymentesLinkBeallitas() {
+        var aktualisLink = window.location.pathname;
+        if (linkek.hasOwnProperty(aktualisLink)) {
+          document.getElementById("akadalymentesLink_desktop").href = linkek[aktualisLink];
+          document.getElementById("akadalymentesLink_mobil").href = linkek[aktualisLink];
+        } else {
+          document.getElementById("akadalymentesLink_desktop").style.cursor = "default";
+          document.getElementById("akadalymentesLink_mobil").style.cursor = "default";
+          document.getElementById("akadalymentesLink_desktop").href = "#";
+          document.getElementById("akadalymentesLink_mobil").href = "#";
+        }
+      }
       aktivMenupontValtas();
       logoAutomatikusValtas();
+      akadalymentesLinkBeallitas();
     </script>
   </body>
 </html>

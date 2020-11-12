@@ -118,13 +118,13 @@ circle {
   display: none;
   position: absolute;
   top: 80px;
-  width: 160px;
-  text-align: center;
+  width: auto;
+  text-align: left;
 
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   border-radius: 8px;
-  padding: 5px;
+  padding: 25px;
   font-size: 18px;
   line-height: 40px;
   font-family: Source Sans Pro;
@@ -146,4 +146,221 @@ circle {
 
 .felvettem:hover + .menu-dropdown-list {
   display: grid;
+}
+
+#desktop-menu-nezet {
+  display: none;
+}
+
+#mobil-menu-nezet{
+  display: grid;
+}
+
+@media only screen and (max-width: 980px) {
+  #desktop-menu-nezet {
+    display: grid;
+  }
+
+  #mobil-menu-nezet{
+    display: none;
+  }
+
+  .menu-button {
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 16px;
+  }
+  #nav-hamburger-icon {
+    z-index: 50;
+    width: 20px;
+    height: 20px;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: 0.5s ease-in-out;
+    -moz-transition: 0.5s ease-in-out;
+    -o-transition: 0.5s ease-in-out;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+  }
+
+  #nav-hamburger-icon span {
+    display: block;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background: black;
+    border-radius: 3px;
+    opacity: 1;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: 0.25s ease-in-out;
+    -moz-transition: 0.25s ease-in-out;
+    -o-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
+  }
+
+  #nav-hamburger-icon span:nth-child(1) {
+    top: 0px;
+  }
+
+  #nav-hamburger-icon span:nth-child(2),
+  #nav-hamburger-icon span:nth-child(3) {
+    top: 6px;
+  }
+
+  #nav-hamburger-icon span:nth-child(4) {
+    top: 12px;
+  }
+
+  #nav-hamburger-icon.open span:nth-child(1) {
+    top: 12px;
+    width: 0%;
+    left: 50%;
+    background-color: #333333;
+  }
+
+  #nav-hamburger-icon.open span:nth-child(2) {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color: #333333;
+  }
+
+  #nav-hamburger-icon.open span:nth-child(3) {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    background-color: #333333;
+  }
+
+  #nav-hamburger-icon.open span:nth-child(4) {
+    top: 18px;
+    width: 0%;
+    left: 50%;
+    background-color: #333333;
+  }
+
+  .menu-layout {
+    display: grid;
+    grid-template-columns: 9fr 1fr;
+    grid-template-rows: auto;
+    grid-template-areas:
+      "logo hamburger"
+      "gombok akadalymentes"
+      "submenu submenu";
+    align-self: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    height: auto;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 10px;
+  }
+
+  .hamburger {
+    grid-area: hamburger;
+    place-self: center;
+  }
+
+  .release {
+    height: 100% !important;
+  }
+
+  .menu-buttons {
+    grid-area: gombok;
+  }
+
+  .akadalymentes {
+    grid-area: akadalymentes;
+    place-self: center;
+  }
+
+  .menu-layout .sub-menu {
+    background-color: #f2f2f2;
+    display: grid;
+    grid-auto-flow: row;
+    overflow: hidden;
+    transition: height 0.5s;
+    height: 0px;
+  }
+
+  .menu-menus a {
+    height: 40px;
+  }
+
+  .logo {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-self: center;
+  }
+
+  .sub-menu {
+    grid-area: submenu;
+  }
+
+  .sub-menu a {
+    font-size: 18px;
+    color: #333333;
+    text-decoration: none;
+    line-height: 40px;
+    font-family: Source Sans Pro;
+    font-weight: bold;
+    padding-left: 10%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+  }
+
+  .sub-menu .szuloknek {
+    background-color: #f2f2f2;
+  }
+
+  .sub-menu .felvettem {
+    background: #1eade8;
+    color: white;
+    cursor: pointer;
+  }
+
+  .felvettem-almenu {
+    display: grid;
+    grid-auto-flow: row;
+    background: #1eade8;
+    color: white;
+    height: 0px;
+    overflow: hidden;
+    transition: height 0.5s;
+    height: 0px;
+  }
+
+  .felvettem-almenu a {
+    background: #1eade8;
+    color: white;
+    padding-left: 15%;
+  }
+
+  .egyebek {
+    display: grid;
+    grid-auto-flow: row;
+  }
+
+  .egyebek a {
+    border: none;
+  }
+  .menu-dropdown {
+    margin-left: 60px;
+    top: 120px;
+  }
+
+  .menu-buttons,
+  .menu-buttons-change,
+  .menu-menus {
+    justify-self: center;
+  }
 }

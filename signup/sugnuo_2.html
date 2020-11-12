@@ -83,64 +83,62 @@
   </style>
   <body>
     <div class="signupp-grid">
-      <span id="automizy-form-12k5ud_osgs2fzjc7i26yyjenv0" class="form-area">
+      <span id="automizy-form-12k5ud_osgs2fzjc7i26yyjenv0">
         <form
-          class="sign-up-form"
           method="post"
           id="automizy-form-12k5ud_osgs2fzjc7i26yyjenv0-form"
-          class="automizy-form-form"
+          class="sign-up-form"
           action="https://api.automizy.com/v2/forms/submit/t1_dmj4IOvMKBqOZ_qQmpNhIfyBr-Omdd9nXCKWbwrI/12k5ud_OSGS2fzJC7i26YYjenv0"
         >
-          <div class="automizy-form-fields">
+          <div>
             <div data-automizy-field="email">
               <input
                 class="form-input"
                 name="email"
                 type="email"
                 maxlength="500"
-                placeholder="E-mail címem*"
+                placeholder="Email address*"
                 required
               />
             </div>
           </div>
           <div>
-            <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-            <script type="text/javascript">
-              automizy_form_12k5ud_osgs2fzjc7i26yyjenv0OnSubmit = function (token) {
-                var form = document.getElementById("automizy-form-12k5ud_osgs2fzjc7i26yyjenv0-form");
-                var submit = document.getElementById("automizy-form-12k5ud_osgs2fzjc7i26yyjenv0-submit");
-                var captchaSubmit = document.getElementById("automizy-form-12k5ud_osgs2fzjc7i26yyjenv0-captcha-submit");
-                submit.style.display = "inline-block";
-                captchaSubmit.style.display = "none";
-                setTimeout(function () {
-                  submit.click();
-                }, 100);
-              };
-            </script>
-            <input id="cb" type="checkbox" style="float: left; margin-top: 5px" />
+            <input type="checkbox" style="float: left; margin-top: 5px" name="consent" required />
             <div class="checkbox-text" style="margin-left: 25px" required>
               Elfogadom az
               <a style="text-decoration: underline" href="/jogi-nyilatkozat/" target="_blank"
                 >adatkezelési irányelveket.</a
               >
             </div>
-            <input
-              type="submit"
-              id="automizy-form-12k5ud_osgs2fzjc7i26yyjenv0-captcha-submit"
-              class="button button--green g-recaptcha center"
-              data-sitekey="6LeeSCgUAAAAAJIDeH8bfJChJznh1bL8t5VMHnhn"
-              data-callback="automizy_form_12k5ud_osgs2fzjc7i26yyjenv0OnSubmit"
-              value="feliratkozás"
-              style="width: 100%"
-            />
-            <input
-              type="submit"
-              id="automizy-form-12k5ud_osgs2fzjc7i26yyjenv0-submit"
-              class="button button--green center"
-              style="display: none"
-              value="feliratkozás"
-            />
           </div>
+          <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+          <script type="text/javascript">
+            automizy_form_12k5ud_osgs2fzjc7i26yyjenv0OnSubmit = function (token) {
+              var form = document.getElementById("automizy-form-12k5ud_osgs2fzjc7i26yyjenv0-form");
+              var submit = document.getElementById("automizy-form-12k5ud_osgs2fzjc7i26yyjenv0-submit");
+              var captchaSubmit = document.getElementById("automizy-form-12k5ud_osgs2fzjc7i26yyjenv0-captcha-submit");
+              submit.style.display = "inline-block";
+              captchaSubmit.style.display = "none";
+              setTimeout(function () {
+                submit.click();
+              }, 100);
+            };
+          </script>
+          <input
+            type="submit"
+            id="automizy-form-12k5ud_osgs2fzjc7i26yyjenv0-captcha-submit"
+            class="button button--green automizy-form-button g-recaptcha center"
+            data-sitekey="6LeeSCgUAAAAAJIDeH8bfJChJznh1bL8t5VMHnhn"
+            data-callback="automizy_form_12k5ud_osgs2fzjc7i26yyjenv0OnSubmit"
+            value="feliratkozás"
+          />
+          <input
+            type="submit"
+            id="automizy-form-12k5ud_osgs2fzjc7i26yyjenv0-submit"
+            class="button button--green automizy-form-button center"
+            style="display: none"
+            value="feliratkozás"
+          />
         </form>
       </span>
       <img
