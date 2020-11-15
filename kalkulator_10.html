@@ -17,9 +17,9 @@
             id="tartozasBemenet"
             type="number"
             min="100000"
-            max="500000"
+            max="1200000"
             step="100000"
-            value="300000"
+            value="600000"
             data-format="Ft"
           />
           <div class="range-wrap">
@@ -29,9 +29,9 @@
               id="tartozasSlider"
               type="range"
               min="100000"
-              max="500000"
+              max="1200000"
               step="100000"
-              value="300000"
+              value="600000"
               data-format="Ft"
             />
           </div>
@@ -67,7 +67,7 @@
         >
       </div>
     </div>
-    <script src="calculatorFunctions.js"></script>
+    <script src="kalkulatorFunkcionalitas.js"></script>
     <script>
       var kamat = 0.0;
 
@@ -79,18 +79,12 @@
        *Bemeneti mezők inicializálása
        */
 
-      //Félévek számához tartozó input mező
       const futamidoBemenet = document.getElementById("futamidoBemenet");
-      //Félévek számához tartozó slider
       const futamidoSlider = document.getElementById("futamidoSlider");
-      //Félévek számához tartozó slider labelje
       const futamidoSliderCimke = document.getElementById("futamidoSliderCimke");
 
-      //Felvett összeghez tartozó input mező
       const tartozasBemenet = document.getElementById("tartozasBemenet");
-      //Felvett összeghez tartozó slider
       const tartozasSlider = document.getElementById("tartozasSlider");
-      //Felvett összegéhez tartozó slider labelje
       const tartozasSliderCimke = document.getElementById("tartozasSliderCimke");
 
       /*

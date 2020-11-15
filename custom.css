@@ -1,29 +1,5 @@
-#main-footer {
-  display: none;
-}
-/* Két oszlop mobil nézetben */
-@media only screen and (max-width: 980px) {
-  .two-columns .et_pb_column {
-    width: 50% !important;
-  }
-}
-
 h2 {
   font-variant: small-caps;
-}
-
-.center {
-  margin: auto;
-}
-
-.et_pb_section,
-.drop-shadow {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-}
-
-.et_pb_section:hover,
-.drop-shadow:hover {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .button {
@@ -77,10 +53,12 @@ h2 {
     font-size: 16px;
   }
 }
-
+/*
+* Ikon mellett cím alattuk leírás csempék MEGJELENÉS
+*/
 .custom-blurb .et_pb_blurb_content {
   display: grid;
-  grid-template-columns: 150px auto;
+  grid-template-columns: 100px auto;
 }
 
 .custom-blurb .et_pb_module_header {
@@ -97,6 +75,46 @@ h2 {
   width: 100px;
 }
 
+@media screen and (max-width: 1200px) {
+  .custom-blurb .et_pb_blurb_content {
+    grid-template-columns: 80px 1fr !important;
+  }
+
+  .custom-blurb .et_pb_image_wrap {
+    width: 80px !important;
+  }
+
+  .custom-blurb .et_pb_blurb_description {
+    padding-left: 0px;
+  }
+}
+
+/*
+* Info (i) ikonnal ellátott csempék MEGJELENÉS
+*/
+.blurb-with-info .et_pb_main_blurb_image {
+  width: 100px;
+  margin-bottom: 0px;
+}
+
+.blurb-with-info .et_pb_blurb_container {
+  align-self: center;
+}
+
+.blurb-with-info .et_pb_blurb_content {
+  display: grid;
+  grid-template-columns: 100px auto 50px;
+}
+
+.blurb-with-info .et_pb_module_header {
+  padding: 0px !important;
+}
+
+.without-icon .et_pb_blurb_content {
+  grid-template-columns: auto auto !important;
+  justify-content: start;
+}
+
 .blurb-left-icon .et_pb_blurb_content {
   display: grid;
   grid-template-columns: 100px auto;
@@ -111,41 +129,49 @@ h2 {
   margin-bottom: 0px;
 }
 
-.diamond-list--white ul {
-  line-height: 40px;
-  padding-left: 40px;
+.without-icon .tooltiptext::after,
+.blurb-with-info-felsorolas .tooltiptext::after {
+  left: calc(100% - 25px);
 }
 
-.diamond-list--dark ul {
-  list-style: none;
+.blurb-with-info-felsorolas,
+.without-icon {
+  display: inline-block;
 }
-.diamond-list--dark ul li {
-  background-image: url("/wp-content/uploads/2020/10/diamond-dark.svg");
-  background-repeat: no-repeat;
-  line-height: 36px;
-  padding-left: 30px;
-  background-position: left 8px;
+.blurb-with-info-felsorolas .et_pb_blurb_content {
+  justify-content: start;
+  grid-template-columns: 36px auto 50px;
 }
 
-.font-white-large {
-  font-weight: bold !important;
+.blurb-with-info-felsorolas .tooltip {
+  padding-top: 7px;
+  justify-self: center;
 }
 
-@media screen and (max-width: 980px) {
-  .diamond-list--white ul {
-    line-height: 40px;
-  }
-  .custom-blurb .et_pb_blurb_content {
-    grid-template-columns: 80px 1fr !important;
-  }
+.blurb-with-info {
+  overflow: visible !important;
+}
 
-  .custom-blurb .et_pb_image_wrap {
-    width: 80px !important;
-  }
+.visible {
+  visibility: visible !important;
+}
+/*
+* ikon nélküli változat
+* Pl.: Diakhitel1 termékoldal
+*/
+.without-icon .tooltip {
+  margin-left: 20px;
+  margin-right: 10px;
+}
+.without-icon .et_pb_blurb_container {
+  padding-left: 0px !important;
+}
 
-  .custom-blurb .et_pb_blurb_description {
-    padding-left: 0px;
-  }
+.without-icon .tooltiptext {
+  transform: translate(0px, -100%) !important;
+}
+
+@media screen and (max-width: 1200px) {
   .blurb-left-icon .et_pb_blurb_content {
     padding: 20px !important;
     grid-template-columns: 1fr;
@@ -156,12 +182,9 @@ h2 {
   }
 }
 
-/* Blog related css */
-.blog-body .et_pb_row {
-  width: 100%;
-}
-
-/* Listing posts */
+/*
+ *  BLOG POSTOK LISTÁZÁSA MEGJELENÍTÉS 
+ */
 .et_pb_post {
   display: grid;
   grid-column-gap: 25px;
@@ -260,72 +283,6 @@ h2 {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.partner-pontok-harmonika a {
-  color: white;
-}
-
-.visible {
-  visibility: visible !important;
-}
-
-.blurb-with-info {
-  overflow: visible !important;
-}
-
-.blurb-with-info .et_pb_main_blurb_image {
-  width: 100px;
-  margin-bottom: 0px;
-}
-
-.blurb-with-info .et_pb_blurb_container {
-  align-self: center;
-}
-
-.blurb-with-info .et_pb_blurb_content {
-  display: grid;
-  grid-template-columns: 100px auto 50px;
-}
-
-.blurb-with-info .et_pb_module_header {
-  padding: 0px !important;
-}
-
-.without-icon .et_pb_blurb_content {
-  grid-template-columns: auto auto !important;
-  justify-content: start;
-}
-
-.without-icon .tooltip {
-  margin-left: 20px;
-  margin-right: 10px;
-}
-.without-icon .et_pb_blurb_container {
-  padding-left: 0px !important;
-}
-
-.without-icon .tooltiptext {
-  transform: translate(0px, -100%) !important;
-}
-
-.without-icon .tooltiptext::after,
-.blurb-with-info-felsorolas .tooltiptext::after {
-  left: calc(100% - 25px);
-}
-
-.blurb-with-info-felsorolas,
-.without-icon {
-  display: inline-block;
-}
-.blurb-with-info-felsorolas .et_pb_blurb_content {
-  justify-content: start;
-  grid-template-columns: 36px auto 50px;
-}
-
-.blurb-with-info-felsorolas .tooltip {
-  padding-top: 7px;
-  justify-self: center;
-}
-
 .tooltip {
   justify-self: center;
   align-self: center;
@@ -367,12 +324,9 @@ h2 {
   margin-top: 20px;
 }
 
-/* 
- * 
- *  KALKULÁTORHOZ TARTOZÓ CSS
- * 
- * 
- */
+/*
+* A tabválasztó megjenése
+*/
 /* A távlasztó tab felső gombjai */
 .tab button {
   background-color: inherit;
@@ -399,6 +353,18 @@ h2 {
   color: rgba(51, 51, 51, 0.5);
 }
 
+@media only screen and (max-width: 980px) {
+  .tab button {
+    width: auto;
+    padding-left: 10px;
+    margin-right: 10px;
+    font-size: 14px;
+  }
+  .tab button:first-child {
+    margin-left: 5px;
+  }
+}
+
 /* Az első gombot eltoljuk a szélétől */
 .tab button:first-child {
   margin-left: 20px;
@@ -421,18 +387,9 @@ h2 {
   display: none;
 }
 
-@media only screen and (max-width: 980px) {
-  .tab button {
-    width: auto;
-    padding-left: 10px;
-    margin-right: 10px;
-    font-size: 14px;
-  }
-  .tab button:first-child {
-    margin-left: 5px;
-  }
-}
-
+/* 
+ *  KALKULÁTORHOZ TARTOZÓ CSS
+ */
 .buton-calculator {
   display: inline-block;
   font-family: Source Sans Pro;
@@ -579,7 +536,7 @@ h2 {
   height: 20px;
   border: 0;
   border-radius: 50%;
-  background-image: url("https://dhk.kifli.tech/wp-content/uploads/2020/10/slider_diamond.png");
+  background-image: url("/wp-content/uploads/2020/10/slider_diamond.png");
   background-size: contain;
   background-position: center center;
   background-repeat: no-repeat;
@@ -694,7 +651,7 @@ h2 {
 
 /*
  * 
- * IGÉNYLÉS MEZŐ CSS
+ * IGÉNYLÉS MEZŐ MEGJELENÉS
  * 
  */
 .kereses-igenyles {
@@ -759,9 +716,10 @@ h2 {
 
 /*
  * 
- * MENU CSS
+ * MENU MEGJENENÉS
  * 
  */
+
 .menu-layout {
   display: grid;
   grid-template-columns: 1fr 2fr 2fr 1fr;
@@ -773,20 +731,22 @@ h2 {
   height: 120px;
 }
 
-.menu-menus a {
+.menu-layout__logo {
+  display: grid;
+}
+
+.menu-layout__menuk a {
   height: 40px;
 }
 
-.menu-circle {
+/* A menü alatt lévő pötty SVG eleme */
+circle {
   transition: opacity 0.2s;
   cursor: pointer;
 }
 
-circle {
-  transition: opacity 0.2s;
-}
-
-.menu-circle:hover circle {
+/* Ha a menü elemre visszük az egeret akkor a pötty sötétebb lesz */
+.menu-layout__menuk__keret:hover circle {
   opacity: 1;
   cursor: pointer;
 }
@@ -843,9 +803,14 @@ circle {
   background: linear-gradient(98deg, #10753a 0%, #47a16c 100%);
 }
 
+.menu-dropdown img {
+  background: white;
+  border-radius: 8px;
+}
+
 .menu-buttons,
 .menu-buttons-change,
-.menu-menus {
+.menu-layout__menuk {
   justify-self: end;
   display: grid;
   grid-auto-flow: column;
@@ -857,7 +822,7 @@ circle {
   cursor: pointer;
 }
 
-.menu-menus {
+.menu-layout__menuk {
   justify-self: start;
 }
 
@@ -1048,7 +1013,7 @@ circle {
     height: 0px;
   }
 
-  .menu-menus a {
+  .menu-layout__menuk a {
     height: 40px;
   }
 
@@ -1118,10 +1083,12 @@ circle {
 
   .menu-buttons,
   .menu-buttons-change,
-  .menu-menus {
+  .menu-layout__menuk {
     justify-self: center;
   }
 }
+
+/* MENU MEGJELENES VEGE */
 
 /*
  *  WP FORMS CSS
@@ -1246,7 +1213,7 @@ circle {
 }
 
 /*
-*** FOOTER ***
+* LÁBLÉC MEGJELENÉS 
 */
 .footer {
   display: grid;
@@ -1342,4 +1309,69 @@ circle {
     justify-self: start;
     margin-top: 20px;
   }
+}
+
+/*
+* EGYÉB CSS
+*/
+
+/* A nyilakat tartalmazó felsorolást felelős osztály */
+.custom-li ul li {
+  list-style-type: "→";
+  margin-left: -0.6em;
+  padding-left: 0.6em;
+}
+
+.diamond-list--white ul {
+  line-height: 40px;
+  padding-left: 40px;
+}
+
+.diamond-list--dark ul {
+  list-style: none;
+}
+.diamond-list--dark ul li {
+  background-image: url("/wp-content/uploads/2020/10/diamond-dark.svg");
+  background-repeat: no-repeat;
+  line-height: 36px;
+  padding-left: 30px;
+  background-position: left 8px;
+}
+
+@media screen and (max-width: 1200px) {
+  .diamond-list--white ul {
+    line-height: 40px;
+  }
+}
+
+.font-white-large {
+  font-weight: bold !important;
+}
+
+/* Két oszlop megjelenítése mobil nézetben */
+@media only screen and (max-width: 980px) {
+  .two-columns .et_pb_column {
+    width: 50% !important;
+  }
+}
+
+/* az adott blokk horizontálisan középre illesztése */
+.center {
+  margin: auto;
+}
+
+/*Minden szakasz drop shadow a design alapján */
+.et_pb_section,
+.drop-shadow {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+}
+
+.et_pb_section:hover,
+.drop-shadow:hover {
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/*  A partner pontok listázása */
+.partner-pontok-harmonika a {
+  color: white;
 }

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="custom.css" />
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" />
-    <script src="calculatorFunctions.js"></script>
+    <script src="kalkulatorFunkcionalitas.js"></script>
 
     <style></style>
   </head>
@@ -239,25 +239,16 @@
        *Bemeneti mezők inicializálása
        */
 
-      //Félévek számához tartozó input mező
       const felevInput = document.getElementById("felevInput");
-      //Félévek számához tartozó slider
       const felevSliderCimke = document.getElementById("felevSliderCimke");
-      //Félévek számához tartozó slider labelje
       const felevSlider = document.getElementById("felevSlider");
 
-      //Bruttó bérhez tartozó input mező
       const bruttoBerInput = document.getElementById("bruttoBerInput");
-      //Bruttó bérhez tartozó slider
       const bruttoBerSlider = document.getElementById("bruttoBerSlider");
-      //Bruttó bérhez tartozó slider labelje
       const bruttoBerSliderV = document.getElementById("bruttoBerSliderV");
 
-      //Félévenként felvett összeghez tartozó input mező
       const tartozasInput = document.getElementById("tartozasInput");
-      //Félévenként felvett összeghez tartozó slider
       const tartozasSlider = document.getElementById("tartozasSlider");
-      //Félévenként felvett összegéhez tartozó slider labelje
       const tartozasSliderCimke = document.getElementById("tartozasSliderCimke");
 
       document.addEventListener(
@@ -278,28 +269,17 @@
       bruttoBerSlider.addEventListener("input", changeInputsValues(bruttoBerInput, bruttoBerSlider, bruttoBerSliderV));
       bruttoBerInput.addEventListener("change", changeInputsValues(bruttoBerInput, bruttoBerSlider, bruttoBerSliderV));
 
-      /*
-       *Bemeneti mezők inicializálása
-       */
-      //Felevek számához tartozó input mező
+
       const felevBemenet_2 = document.getElementById("felevBemenet_2");
-      //Félévek számához tartozó slider
       const felevSlider_2 = document.getElementById("felevSlider_2");
-      //Félévek számához tartozó slider labelje
       const felevSliderCimke_2 = document.getElementById("felevSliderCimke_2");
 
-      //Félévek számához tartozó input mező
       const futamidoBemenet_2 = document.getElementById("futamidoBemenet_2");
-      //Félévek számához tartozó slider
       const futamidoSlider_2 = document.getElementById("futamidoSlider_2");
-      //Félévek számához tartozó slider labelje
       const futamidoSliderCimke_2 = document.getElementById("futamidoSliderCimke_2");
 
-      //Felvett összeghez tartozó input mező
       const tartozasBemenet = document.getElementById("tartozasBemenet");
-      //Felvett összeghez tartozó slider
       const tartozasSlider_2 = document.getElementById("tartozasSlider_2");
-      //Felvett összegéhez tartozó slider labelje
       const tartozasSliderCimke_2 = document.getElementById("tartozasSliderCimke_2");
 
       /*

@@ -1,18 +1,3 @@
-function changeBlurbLayout(blurb) {
-  var blurbContent = blurb.getElementsByClassName("et_pb_blurb_content")[0];
-  var content = blurb.getElementsByClassName("et_pb_blurb_container")[0];
-  var contentclone = content.children;
-  blurbContent.appendChild(contentclone[0]);
-  blurbContent.appendChild(contentclone[0]);
-  content.remove();
-}
-
-var blurbs = document.getElementsByClassName("custom-blurb");
-for (var i = 0; i < blurbs.length; i++) {
-  changeBlurbLayout(blurbs[i]);
-}
-
-
 /**
  * A fülszöveg modulok átalakítására szolgáló függvény
  * A fülszövegekből info gombbal ellátott fülszöveget csinál
@@ -22,7 +7,7 @@ for (var i = 0; i < blurbs.length; i++) {
 function blurbWithInfo(blurb) {
   var blurbContent = blurb.getElementsByClassName("et_pb_blurb_content")[0];
   var blurbDescription = blurb.getElementsByClassName("et_pb_blurb_description")[0];
-  var infoButton= document.createElement("img");
+  var infoButton = document.createElement("img");
   infoButton.classList.add("tooltip");
   infoButton.src = "/wp-content/uploads/2020/11/i.svg";
   var tooltipText = document.createElement("div");
@@ -34,29 +19,38 @@ function blurbWithInfo(blurb) {
   blurbContent.appendChild(tooltipText);
 }
 
+//megkressi az összes fülszöveget és végrehajtha a módosítást
 var infoBlurbs = document.getElementsByClassName("blurb-with-info");
 for (var i = 0; i < infoBlurbs.length; i++) {
   blurbWithInfo(infoBlurbs[i]);
 }
 
+
+//Az alábbi függvény kezeli az tooltip megjeneését
+//minden az oldalon belüli kattintásra lefut
 document.addEventListener("click", function (e) {
-   console.log("clicked")
   var infoTooltipText = document.getElementsByClassName("tooltiptext");
+  //végig igerál az összes tooltipen és megnézi, hogy arra kattinttunk-e
   for (var i = 0; i < infoTooltipText.length; i++) {
     if (infoTooltipText[i].contains(e.target)) {
       //Ha a tooltippbe kattintott nem csinálunk semmit!
     } else {
-      //Ha a tooltippen kívül van akkor megnézzük, hogy az i re kattintott-e
-      if (e.target.classList.contains("tooltip")) {
-        //Ha igen akkor ha  nyitva akkor zárjuk ha zárva van nyitjuk
-        e.target.nextSibling.classList.toggle("visible");
-        console.log( e.target.nextSibling)
-        return
+      //Ha a tooltippen kívül van akkor megnézzük, hogy az i re kattintott-e és az aktív-e
+      if (e.target.classList.contains("tooltip") && e.target.nextSibling.classList.contains("visible")) {
+        //ha aktiv akkor inaktiváljuk
+        e.target.nextSibling.classList.remove("visible");
       } else {
-        infoTooltipText[i].classList.remove("visible")
+        //ha nem akatív akkor mindent inaktiválunk
+        for (var j = 0; j < infoTooltipText.length; j++) {
+          //Minden tooltippet bezárunk kivéve amelyikre kattintottunk
+          if(!infoTooltipText[j].contains(e.target)) {
+                infoTooltipText[j].classList.remove("visible");
+          }
+        }
+        //Amire kattintottunk azt aktiváljuk
+        e.target.nextSibling.classList.add("visible");
       }
+      return;
     }
   }
 });
-
-
