@@ -64,32 +64,18 @@
     </nav>
 
     <script>
-      function linkekAtirasa() {
-        if (localStorage.getItem("Akadalymentesites")) {
-          harmonikaElemekKinyitasa();
-          var anchors = document.getElementsByTagName("a");
-          document.getElementById("oldal-teteje-gomb").style.display = "none";
-          document.getElementById("footer-sor").style.backgroundColor = "black";
-          for (var i = 0; i < anchors.length; ++i) {
-            if (anchors[i].href.includes("rolunk") || anchors[i].href.includes("elerhetoseg")) {
-              anchors[i].href += "-akadalymentesitett";
-            }
+      if (new URLSearchParams(window.location.search).has("akadalymentesitett")) {
+        var anchors = document.getElementsByTagName("a");
+        document.getElementById("oldal-teteje-gomb").style.display = "none";
+        document.getElementById("footer-sor").style.backgroundColor = "black";
+        for (var i = 0; i < anchors.length; ++i) {
+          if (anchors[i].href.includes("rolunk") || anchors[i].href.includes("elerhetosegek")) {
+            anchors[i].href += "-akadalymentesitett?akadalymentesitett=true";
+          } else {
+            anchors[i].href += "?akadalymentesitett=true";
           }
         }
       }
-
-      function harmonikaElemekKinyitasa() {
-        jQuery(function ($) {
-          $(".et_pb_accordion .et_pb_toggle_close").addClass("et_pb_toggle_open").removeClass("et_pb_toggle_close");
-          $(".et_pb_accordion .et_pb_toggle").click(function () {
-            $this = $(this);
-            setTimeout(function () {
-              $this.closest(".et_pb_accordion").removeClass("et_pb_accordion_toggling");
-            }, 700);
-          });
-        });
-      }
-      linkekAtirasa();
     </script>
   </body>
 

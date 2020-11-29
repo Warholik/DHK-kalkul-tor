@@ -9,9 +9,9 @@
   </head>
   <body>
     <div class="calculatorContainer">
-      <div>
+      <form name="Kalkulátor">
         <div class="section-input">
-          <h3>Tartozásod összege</h3>
+          <label class="h3-label">Tartozásod összege</label>
           <input
             class="number"
             id="tartozasBemenet"
@@ -21,6 +21,9 @@
             step="100000"
             value="600000"
             data-format="Ft"
+            aria-valuemin="100000"
+            aria-valuemax="1200000"
+            aria-valuenow="600000"
           />
           <div class="range-wrap">
             <div class="range-value" id="tartozasSliderCimke"></div>
@@ -32,13 +35,16 @@
               max="1200000"
               step="100000"
               value="600000"
+              aria-valuemin="100000"
+              aria-valuemax="1200000"
+              aria-valuenow="600000"
               data-format="Ft"
             />
           </div>
         </div>
 
         <div class="section-input">
-          <h3>Törlesztési időszak</h3>
+          <label class="h3-label">Törlesztési időszak</label>
           <input
             id="futamidoBemenet"
             class="number"
@@ -48,19 +54,39 @@
             step="1"
             value="3"
             data-format="Év"
+            aria-valuemin="1"
+            aria-valuemax="5"
+            aria-valuenow="3"
+            data-format="Év"
           />
           <div class="range-wrap">
             <div class="range-value" id="futamidoSliderCimke"></div>
-            <input id="futamidoSlider" class="range" type="range" min="1" max="5" step="1" value="3" data-format="Év" />
+            <input
+              id="futamidoSlider"
+              class="range"
+              type="range"
+              min="1"
+              max="5"
+              step="1"
+              value="3"
+              data-format="Év"
+              aria-valuemin="1"
+              aria-valuemax="5"
+              aria-valuenow="3"
+              data-format="Év"
+            />
           </div>
         </div>
-      </div>
+        <button type="submit" onclick="szamol()" id="kiszamolGomb" style="display: none">Kiszámolom</button>
+      </form>
       <div class="calculator-outputs">
-        <p class="font-bigger">
-          Törlesztőrészlet<br />
-          <span id="torlesztoReszletCimke"></span>
-        </p>
+        <h2 style="display: none" id="eredmenyek" tabindex="-1">Eredmények</h2>
+
+        <p id="Törlesztőrészlet-eredmény" class="font-bigger">Törlesztőrészlet</p>
+        <output tabindex="-1" for="Törlesztőrészlet-eredmény" id="torlesztoReszletCimke"></output>
+
         <a
+          id="erdekelGomb"
           href="https://diakhitelplusz.diakhiteldirekt.hu/hiteligenyles"
           class="buton-calculator buton-calculator--blue button--calculator"
           >Érdekel</a
@@ -69,7 +95,6 @@
     </div>
     <script src="kalkulatorFunkcionalitas.js"></script>
     <script>
-
       function kalkulatorKimenet() {
         torlesztoreszletFutamidoAlapjan_DH2();
       }
@@ -77,6 +102,29 @@
       /*
        *Bemeneti mezők inicializálása
        */
+
+      function akadalymentesKalkulator() {
+        if (localStorage.getItem("Akadalymentesites")) {
+          document.getElementById("eredmenyek").classList.add("display");
+          document.getElementById("erdekelGomb").style.display = "none";
+          document.getElementById("kiszamolGomb").classList.add("display");
+          document.getElementById("kiszamolGomb").style.marginTop = "20px";
+          var inputs = document.getElementsByTagName("input");
+          for (var key in inputs) {
+            if (inputs[key].type == "number") {
+              inputs[key].style.display = "none";
+            }
+          }
+        }
+      }
+      akadalymentesKalkulator();
+
+      function szamol() {
+        event.preventDefault();
+        changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke);
+        var eredmeny = document.getElementById("eredmenyek");
+        eredmeny.focus();
+      }
 
       const futamidoBemenet = document.getElementById("futamidoBemenet");
       const futamidoSlider = document.getElementById("futamidoSlider");
@@ -116,4 +164,5 @@
       );
     </script>
   </body>
+  <script src="config.js"></script>
 </html>

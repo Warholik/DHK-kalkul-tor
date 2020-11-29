@@ -6,12 +6,13 @@
     <link rel="stylesheet" href="custom.css" />
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet" />
+    <script src="kalkulatorFunkcionalitas.js"></script>
   </head>
   <body>
     <div class="calculatorContainer">
-      <div>
+      <form name="Diakhitel Plusz Kalkulátor">
         <div class="section-input">
-          <h3>Tartozásod összege</h3>
+          <label for="tartozasSlider" class="h3-label">Tartozásod összege</label>
           <input
             class="number"
             id="tartozasBemenet"
@@ -21,6 +22,9 @@
             step="100000"
             value="300000"
             data-format="Ft"
+            aria-valuemin="100000"
+            aria-valuemax="500000"
+            aria-valuenow="300000"
           />
           <div class="range-wrap">
             <div class="range-value" id="tartozasSliderCimke"></div>
@@ -33,12 +37,15 @@
               step="100000"
               value="300000"
               data-format="Ft"
+              aria-valuemin="100000"
+              aria-valuemax="500000"
+              aria-valuenow="300000"
             />
           </div>
         </div>
 
         <div class="section-input">
-          <h3>Törlesztési időszak</h3>
+          <label for="futamidoSlider" class="h3-label">Törlesztési időszak</label>
           <input
             id="futamidoBemenet"
             class="number"
@@ -47,6 +54,9 @@
             max="5"
             step="1"
             value="3"
+            aria-valuemin="1"
+            aria-valuemax="5"
+            aria-valuenow="3"
             data-format="Év"
           />
           <div class="range-wrap">
@@ -54,25 +64,49 @@
             <input id="futamidoSlider" class="range" type="range" min="1" max="5" step="1" value="3" data-format="Év" />
           </div>
         </div>
-      </div>
+        <button type="submit" onclick="szamol()" id="kiszamolGomb" style="display: none">Kiszámolom</button>
+      </form>
       <div class="calculator-outputs">
-        <p class="font-bigger">
-          Törlesztőrészlet<br />
-          <span id="torlesztoReszletCimke"></span>
-        </p>
+        <h2 style="display: none" id="eredmenyek" tabindex="-1">Eredmények</h2>
+        <p class="font-bigger" id="Törlesztőrészlet-eredmény">Törlesztőrészlet<br /></p>
+        <output tabindex="-1" for="Törlesztőrészlet-eredmény" id="torlesztoReszletCimke"></output>
+
         <a
+          id="erdekelGomb"
           href="https://diakhitelplusz.diakhiteldirekt.hu/hiteligenyles"
           class="buton-calculator buton-calculator--blue button--calculator"
-          >Érdekel</a
         >
+          Érdekel
+        </a>
       </div>
     </div>
-    <script src="kalkulatorFunkcionalitas.js"></script>
-    <script>
-      var kamat = 0.0;
 
+    <script>
       function kalkulatorKimenet() {
         torlesztoreszletFutamidoAlapjan_DH2();
+      }
+
+      function akadalymentesKalkulator() {
+        if (localStorage.getItem("Akadalymentesites")) {
+          document.getElementById("eredmenyek").classList.add("display");
+          document.getElementById("erdekelGomb").style.display = "none";
+          document.getElementById("kiszamolGomb").classList.add("display");
+          document.getElementById("kiszamolGomb").style.marginTop = "20px";
+          var inputs = document.getElementsByTagName("input");
+          for (var key in inputs) {
+            if (inputs[key].type == "number") {
+              inputs[key].style.display = "none";
+            }
+          }
+        }
+      }
+      akadalymentesKalkulator();
+
+      function szamol() {
+        event.preventDefault();
+        changeInputsValues(futamidoBemenet, futamidoSlider, futamidoSliderCimke);
+        var eredmeny = document.getElementById("eredmenyek");
+        eredmeny.focus();
       }
 
       /*
@@ -117,4 +151,5 @@
       );
     </script>
   </body>
+  <script src="config.js"></script>
 </html>

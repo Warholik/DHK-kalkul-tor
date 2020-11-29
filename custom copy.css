@@ -8,7 +8,7 @@ h2 {
   font-size: 18px;
   font-style: normal;
   font-weight: 700;
-  line-height: 40px;
+  line-height: 23px;
   letter-spacing: 0em;
   text-align: center;
   text-transform: uppercase;
@@ -23,7 +23,6 @@ h2 {
 .button:hover {
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5) !important;
   border: none !important;
-  cursor: pointer;
 }
 
 .button--yellow {
@@ -910,7 +909,7 @@ circle {
     padding-right: 20px;
     font-size: 16px;
   }
-  .nav-hamburger-icon {
+  #nav-hamburger-icon {
     z-index: 50;
     width: 20px;
     height: 20px;
@@ -925,7 +924,7 @@ circle {
     cursor: pointer;
   }
 
-  .nav-hamburger-icon span {
+  #nav-hamburger-icon span {
     display: block;
     position: absolute;
     height: 3px;
@@ -944,16 +943,16 @@ circle {
     transition: 0.25s ease-in-out;
   }
 
-  .nav-hamburger-icon span:nth-child(1) {
+  #nav-hamburger-icon span:nth-child(1) {
     top: 0px;
   }
 
-  .nav-hamburger-icon span:nth-child(2),
-  .nav-hamburger-icon span:nth-child(3) {
+  #nav-hamburger-icon span:nth-child(2),
+  #nav-hamburger-icon span:nth-child(3) {
     top: 6px;
   }
 
-  .nav-hamburger-icon span:nth-child(4) {
+  #nav-hamburger-icon span:nth-child(4) {
     top: 12px;
   }
 
@@ -1103,148 +1102,24 @@ circle {
   }
 }
 
-.nav > li {
-  position: relative;
-  display: block;
+#menu-akadalymentes ul {
+  list-style-type: none;
 }
 
-.navbar-nav > li > a {
-  padding-top: 15px;
-  padding-bottom: 15px;
+#menu-akadalymentes .dropdown-menu {
+  width: auto;
+  border: none;
+}
+.navbar {
+  margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
-.nav > li > a {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
+#menu-akadalymentes a {
+  font-size: 22px;
+  color: black;
 }
 
-.dropdown-menu {
-  position: absolute;
-  z-index: 1000;
-  display: none;
-  float: left;
-  min-width: 160px;
-  padding: 5px 0;
-  margin: 2px 0 0;
-  font-size: 14px;
-  text-align: left;
-  list-style: none;
-  background-color: #fff;
-  background-clip: padding-box;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.15);
-  border-radius: 4px;
-  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
-}
-
-.dropdown-menu li {
-  padding: 10px 10px 0px 10px;
-}
-
-.navbar-nav > li {
-  float: left;
-}
-
-.navbar-toggle {
-  position: relative;
-  float: right;
-  padding: 9px 10px;
-  margin-right: 15px;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  background-color: transparent;
-  background-image: none;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-
-.navbar-toggle .icon-bar {
-  display: block;
-  width: 22px;
-  height: 2px;
-  border-radius: 1px;
-}
-
-.navbar-collapse {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-
-.navbar-toggle .icon-bar {
-  background-color: #333;
-}
-
-.navbar .navbar-toggle {
-  border-color: #333;
-}
-
-@media only screen and (min-width: 768px) {
-  .navbar-collapse.collapse {
-    display: block !important;
-    height: auto !important;
-    padding-bottom: 0;
-    overflow: visible !important;
-  }
-  .navbar-collapse {
-    width: auto;
-    border-top: 0;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-  }
-  .navbar-toggle {
-    display: none;
-  }
-}
-
-.menu-layout-akadalymentes {
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  height: auto;
-  padding: 10px 0px 10px 0px;
-  display: grid;
-  font-family: sans-serif;
-  min-height: 50px;
-  font-size: 18px;
-}
-
-.menu-layout-akadalymentes a {
-  color: #000;
-  text-decoration-line: none;
-}
-
-.menu-layout-akadalymentes a:hover,
-.menu-layout-akadalymentes a:focus {
-  border: solid 1px;
-}
-
-.menu-akadalymentes {
-  padding: 0px 0px 0px 40px !important;
-  padding-left: 40px;
-  display: grid;
-  grid-auto-flow: column;
-  justify-items: start;
-  justify-content: start;
-  grid-column-gap: 30px;
-}
-
-.menu-akadalymentes,
-.dropdown-menu {
-  list-style: none;
-  list-style-type: none !important;
-}
-
-@media only screen and (max-width: 768px) {
-  .navbar-nav > li {
-    width: 100%;
-  }
-
-  .menu-akadalymentes {
-    display: none;
-    grid-auto-flow: row;
-    grid-row-gap: 10px;
-  }
-}
 /* MENU MEGJELENES VEGE */
 
 /*
@@ -1375,134 +1250,12 @@ circle {
 .footer {
   display: grid;
   grid-template-rows: 1fr 1fr;
-  grid-template-columns: 5fr 5fr 1fr;
-  grid-template-areas:
-    "logo menuk fel"
-    "masodik masodik masodik";
-  padding: 0px !important;
 }
 
-.footer__kep--logo {
-  grid-area: logo;
-  padding-left: 100px;
-  align-self: center;
-}
-
-.footer__menupontok {
-  height: 100%;
-  grid-area: menuk;
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: end;
-  align-self: center;
-  grid-gap: 20px;
-  padding: 0 !important;
-  align-items: center;
-}
-
-.footer__menupontok a {
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 18px;
-  color: #333333;
-}
-
-.footer__masodik-sor {
-  grid-area: masodik;
-  padding-left: 100px;
-}
-
-.footer__masodik-sor-grid {
-  display: grid;
-  grid-template-columns: 5fr 5fr 1fr;
-  grid-template-areas: "jog mfb fel";
-  padding: 10px 0px 10px 0px !important;
-}
-
-.footer__jog,
-.footer__jog a {
-  font-family: Source Sans Pro;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 14px;
-  color: #ffffff;
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: start;
-  grid-gap: 20px;
-  align-items: center;
-  height: 100%;
-  padding: 0px !important;
-}
-
-.footer__kep--mfb {
-  justify-self: end;
-  align-self: center;
-  grid-area: mfb;
-}
-
-.footer__kep--oldalteteje {
-  grid-area: fel;
-  justify-self: center;
-  margin-top: -40px;
-}
-
-.footer ul,
-.footer li,
-.footer {
+.footer ul {
   list-style-type: none;
-}
-
-@media only screen and (max-width: 980px) {
-  .footer ul {
-    padding: 0;
-  }
-  .footer {
-    grid-template-rows: auto;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "logo"
-      "menuk"
-      "fel"
-      "masodik";
-  }
-  .footer__menupontok {
-    grid-auto-flow: row;
-    justify-content: start;
-    padding-left: 5% !important;
-  }
-
-  .footer__kep--logo {
-    padding: 5%;
-  }
-
-  .footer__masodik-sor {
-    padding-left: 5%;
-    margin-top: 20px;
-  }
-
-  .footer__masodik-sor-grid {
-    display: grid;
-    grid-row-gap: 20px;
-    grid-template-columns: 1fr;
-    grid-template-areas:
-      "jog"
-      "mfb"
-      "fel";
-  }
-  .footer__jog {
-    grid-auto-flow: row;
-    padding-top: 20px !important;
-  }
-  .footer__kep--oldalteteje {
-    margin: 0;
-  }
-  .footer__kep--mfb {
-    justify-self: center;
-  }
+  margin: 0;
+  padding: 0;
 }
 
 .footer__szoveg,
@@ -1511,53 +1264,95 @@ circle {
   text-decoration: none;
 }
 
-/*
-* Cookie Bar
-*/
-#cookie-bar.fixed.bottom {
-  bottom: 0;
-  top: auto;
+.footer__sor {
+  display: grid;
+  grid-template-columns: 1fr 5fr 5fr 1fr;
+  grid-template-areas: ". elso masodik fel";
+  min-height: 60px;
 }
-#cookie-bar.fixed {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+
+.footer__kep--logo {
+  grid-area: elso;
+  align-self: center;
 }
-#cookie-bar {
-  background: #000000;
-  height: auto;
-  line-height: 24px;
-  color: #eeeeee;
-  text-align: center;
-  padding: 3px 0;
-  z-index: 10000;
-  opacity: 0.9;
+.footer__sor--belso {
+  grid-area: masodik;
+  display: grid;
+  grid-auto-flow: column;
+  align-self: center;
+  justify-self: end;
+  grid-column-gap: 20px;
 }
-#cookie-bar .jogLink {
-  text-decoration: underline;
+
+.footer__sor--belso--jogi {
+  grid-area: elso;
+  justify-self: start;
+}
+
+.footer__link {
+  font-family: Source Sans Pro;
+  font-style: normal;
   font-weight: bold;
-  margin-right: 20px;
+  font-size: 18px;
+  line-height: 23px;
+  color: #333333;
 }
-#cookie-bar a {
+
+.footer__szoveg {
+  font-family: Source Sans Pro;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 18px;
   color: #ffffff;
-  display: inline-block;
+}
+
+.footer__kep--mfb {
+  justify-self: end;
+  align-self: center;
+  grid-area: masodik;
+}
+
+.footer__kep--oldalteteje {
+  grid-area: fel;
+  justify-self: center;
+  margin-top: -40px;
+}
+
+.hatter--kek {
+  background-color: #1eade8;
+}
+
+@media only screen and (max-width: 980px) {
+  .footer {
+    grid-template-columns: 1fr;
+  }
+
+  .footer__sor {
+    padding: 5%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas:
+      "elso"
+      "masodik"
+      "fel";
+  }
+  .footer__sor--belso {
+    grid-auto-flow: row;
+    justify-self: start;
+    grid-row-gap: 10px;
+  }
+
+  .footer__kep--mfb {
+    justify-self: start;
+    margin-top: 20px;
+  }
 }
 
 /*
 * EGYÉB CSS
 */
 
-#popup-verzio {
-  display: none;
-}
-.ertesites {
-  background-color: #1eade8;
-}
-
-.hatter--kek {
-  background-color: #1eade8;
-}
 /* A nyilakat tartalmazó felsorolást felelős osztály */
 .custom-li ul li {
   list-style-type: "→";
@@ -1623,44 +1418,5 @@ circle {
 .calculator-outputs p:focus,
 .calculator-outputs h2:focus,
 .calculator-outputs output:focus {
-  background-color: black;
-  color: white;
-}
-
-.akadalymentes button {
-  padding: 5px 10px;
-  font-size: 18px;
-}
-
-.akadalymentes button:focus {
-  background-color: black;
-  color: white !important;
-}
-
-.akadalymentes input:focus {
-  border: solid 1px black;
-}
-
-.akadalymentes a:focus {
-  border: solid 1px black;
-}
-
-.akadalymentes .ertesites p {
-  text-shadow: none;
-}
-
-.akadalymentes .ertesites {
-  background-color: black !important;
-}
-
-.akadalymentes .tab button {
-  color: black;
-}
-
-.akadalymentes .tab button.active {
-  color: black;
-}
-
-.akadalymentes #main-content a {
-  color: blue !important;
+  background-color: red;
 }

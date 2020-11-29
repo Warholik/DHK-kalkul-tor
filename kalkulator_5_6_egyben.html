@@ -13,14 +13,16 @@
   <body>
     <div>
       <div class="tab">
-        <button class="tablinks" onclick="kalkulatorValtas(event, 'calculator_1')" id="defaultOpen">Törlesztési idő</button>
+        <button class="tablinks" onclick="kalkulatorValtas(event, 'calculator_1')" id="defaultOpen">
+          Törlesztési idő
+        </button>
         <button class="tablinks" onclick="kalkulatorValtas(event, 'calculator_2')">Törlesztőrészlet</button>
       </div>
       <div class="tabcontent" id="calculator_1">
         <div class="calculatorContainer">
-          <div>
+          <form name="Diakhitel2 Kalkulátor">
             <div class="section-input">
-              <h3>Féléveként felvett összeg</h3>
+              <label class="h3-label">Féléveként felvett összeg</label>
               <input
                 class="number"
                 id="tartozasInput"
@@ -30,6 +32,9 @@
                 step="20000"
                 value="360000"
                 data-format="Ft"
+                aria-valuemin="100000"
+                aria-valuemax="1500000"
+                aria-valuenow="360000"
               />
               <div class="range-wrap">
                 <div class="range-value" id="tartozasSliderCimke"></div>
@@ -42,12 +47,15 @@
                   step="20000"
                   value="360000"
                   data-format="Ft"
+                  aria-valuemin="100000"
+                  aria-valuemax="1500000"
+                  aria-valuenow="360000"
                 />
               </div>
             </div>
 
             <div class="section-input">
-              <h3>Félévek száma</h3>
+              <label class="h3-label">Félévek száma</label>
               <input
                 id="felevInput"
                 class="number"
@@ -57,6 +65,9 @@
                 step="1"
                 value="6"
                 data-format="Félév"
+                aria-valuemin="1"
+                aria-valuemax="14"
+                aria-valuenow="6"
               />
               <div class="range-wrap">
                 <div class="range-value" id="felevSliderCimke"></div>
@@ -69,12 +80,15 @@
                   step="1"
                   value="6"
                   data-format="Félév"
+                  aria-valuemin="1"
+                  aria-valuemax="14"
+                  aria-valuenow="6"
                 />
               </div>
             </div>
 
             <div class="section-input">
-              <h3>Várható havi bruttó bér</h3>
+              <label class="h3-label">Várható havi bruttó bér</label>
               <input
                 id="bruttoBerInput"
                 class="number"
@@ -84,6 +98,9 @@
                 step="50000"
                 value="450000"
                 data-format="Ft"
+                aria-valuemin="250000"
+                aria-valuemax="1500000"
+                aria-valuenow="450000"
               />
               <div class="range-wrap">
                 <div class="range-value" id="bruttoBerSliderV"></div>
@@ -96,30 +113,39 @@
                   step="50000"
                   value="450000"
                   data-format="Ft"
+                  aria-valuemin="250000"
+                  aria-valuemax="1500000"
+                  aria-valuenow="450000"
                 />
               </div>
             </div>
-          </div>
+            <button type="submit" onclick="szamol()" id="kiszamolGomb" style="display: none">Kiszámolom</button>
+          </form>
           <div class="calculator-outputs">
-            <p class="font-normal">Felvett hitel összege <br /><span id="felvettHitelOsszegeCimke"></span></p>
-            <p class="font-normal">
-              Törlesztési arány <br />
-              <span id="torlesztoReszletSzazalekLabel"></span>
-            </p>
-            <p class="font-bigger">
-              Törlesztőrészlet <br />
-              <span id="torlesztoReszletCimke"></span>
-            </p>
-            <p class="font-bigger">Törlesztési idő <br /><span id="futamidoCimke"></span></p>
-            <a href="/igenyles/ " class="buton-calculator buton-calculator--blue button--calculator">Érdekel</a>
+            <h2 style="display: none" id="eredmenyek" tabindex="-1">Eredmények</h2>
+
+            <p class="font-normal" id="felvett-hitel-osszege">Felvett hitel összege</p>
+            <output tabindex="-1" for="felvett-hitel-osszege" id="felvettHitelOsszegeCimke"></output>
+
+            <p class="font-normal" id="Törlesztőrésztesi-arány">Törlesztési arány</p>
+            <output tabindex="-1" for="Törlesztőrésztesi-arány" id="torlesztoReszletSzazalekLabel"></output>
+
+            <p class="font-bigger" id="Törlesztőrészlet">Törlesztőrészlet</p>
+            <output tabindex="-1" for="Törlesztőrészlet" id="torlesztoReszletCimke"></output>
+
+            <p class="font-bigger" id="Törlesztési-idő">Törlesztési idő</p>
+            <output tabindex="-1" for="Törlesztési-idő" id="futamidoCimke"></output>
+            <a href="/igenyles/ " id="erdekelGomb" class="buton-calculator buton-calculator--blue button--calculator"
+              >Érdekel</a
+            >
           </div>
         </div>
       </div>
       <div class="tabcontent" id="calculator_2" style="display: none">
         <div class="calculatorContainer">
-          <div>
+          <form name="Diakhitel2 Kalkulátor">
             <div class="section-input">
-              <h3>Félévenként felvett összeg</h3>
+              <label class="h3-label">Félévenként felvett összeg</label>
               <input
                 class="number"
                 id="tartozasBemenet"
@@ -129,6 +155,9 @@
                 step="20000"
                 value="360000"
                 data-format="Ft"
+                aria-valuemin="100000"
+                aria-valuemax="1500000"
+                aria-valuenow="360000"
               />
               <div class="range-wrap">
                 <div class="range-value" id="tartozasSliderCimke_2"></div>
@@ -141,11 +170,14 @@
                   step="20000"
                   value="360000"
                   data-format="Ft"
+                  aria-valuemin="100000"
+                  aria-valuemax="1500000"
+                  aria-valuenow="360000"
                 />
               </div>
             </div>
             <div class="section-input">
-              <h3>Félévek száma</h3>
+              <label class="h3-label">Félévek száma</label>
               <input
                 class="number"
                 id="felevBemenet_2"
@@ -155,6 +187,9 @@
                 step="1"
                 value="6"
                 data-format="Félév"
+                aria-valuemin="1"
+                aria-valuemax="12"
+                aria-valuenow="6"
               />
               <div class="range-wrap">
                 <div class="range-value" id="felevSliderCimke_2"></div>
@@ -167,12 +202,15 @@
                   step="1"
                   value="6"
                   data-format="Félév"
+                  aria-valuemin="1"
+                  aria-valuemax="12"
+                  aria-valuenow="6"
                 />
               </div>
             </div>
 
             <div class="section-input">
-              <h3>Törlesztési idő</h3>
+              <label class="h3-label">Törlesztési idő</label>
               <input
                 id="futamidoBemenet_2"
                 class="number"
@@ -182,6 +220,9 @@
                 step="1"
                 value="6"
                 data-format="Év"
+                aria-valuemin="1"
+                aria-valuemax="15"
+                aria-valuenow="6"
               />
               <div class="range-wrap">
                 <div class="range-value" id="futamidoSliderCimke_2"></div>
@@ -194,17 +235,27 @@
                   step="1"
                   value="6"
                   data-format="Év"
+                  aria-valuemin="1"
+                  aria-valuemax="15"
+                  aria-valuenow="6"
+                  data-format="Év"
                 />
               </div>
             </div>
-          </div>
+            <button type="submit" onclick="szamol2()" id="kiszamolGomb-2" style="display: none">Kiszámolom</button>
+          </form>
           <div class="calculator-outputs">
-            <p class="font-normal">Felvett hitel összege <br /><span id="felvettHitelOsszegeCimke_2"></span></p>
-            <p class="font-bigger">
-              Szükséges törlesztőrészlet <br />
-              <span id="torlesztoReszletCimke_2"></span>
-            </p>
-            <a href="/igenyles/ " class="buton-calculator buton-calculator--blue button--calculator">Érdekel</a>
+            <h2 style="display: none" id="eredmenyek-2" tabindex="-1">Eredmények</h2>
+
+            <p class="font-normal" id="hitel-osszeg">Felvett hitel összege</p>
+            <output tabindex="-1" for="hitel-osszeg" id="felvettHitelOsszegeCimke_2"></output>
+
+            <p id="szukseges-torlesztoreszlet" class="font-bigger">Szükséges törlesztőrészlet</p>
+            <output tabindex="-1" for="szukseges-torlesztoreszlet" id="torlesztoReszletCimke_2"></output>
+
+            <a href="/igenyles/ " id="erdekelGomb-2" class="buton-calculator buton-calculator--blue button--calculator"
+              >Érdekel</a
+            >
           </div>
         </div>
       </div>
@@ -233,6 +284,40 @@
       function kalkulatorKimenet() {
         futamido_DH2();
         torlesztoreszletFutamidoAlapjanFelevente_DH2();
+      }
+
+      function akadalymentesKalkulator() {
+        if (localStorage.getItem("Akadalymentesites")) {
+          document.getElementById("eredmenyek").classList.add("display");
+          document.getElementById("eredmenyek-2").classList.add("display");
+          document.getElementById("erdekelGomb").style.display = "none";
+          document.getElementById("erdekelGomb-2").style.display = "none";
+          document.getElementById("kiszamolGomb").classList.add("display");
+          document.getElementById("kiszamolGomb").style.marginTop = "20px";
+          document.getElementById("kiszamolGomb-2").classList.add("display");
+          document.getElementById("kiszamolGomb-2").style.marginTop = "20px";
+          var inputs = document.getElementsByTagName("input");
+          for (var key in inputs) {
+            if (inputs[key].type == "number") {
+              inputs[key].style.display = "none";
+            }
+          }
+        }
+      }
+      akadalymentesKalkulator();
+
+      function szamol() {
+        event.preventDefault();
+        kalkulatorKimenet();
+        var eredmeny = document.getElementById("eredmenyek");
+        eredmeny.focus();
+      }
+
+      function szamol2() {
+        event.preventDefault();
+        kalkulatorKimenet();
+        var eredmeny = document.getElementById("eredmenyek-2");
+        eredmeny.focus();
       }
 
       /*
@@ -268,7 +353,6 @@
       );
       bruttoBerSlider.addEventListener("input", changeInputsValues(bruttoBerInput, bruttoBerSlider, bruttoBerSliderV));
       bruttoBerInput.addEventListener("change", changeInputsValues(bruttoBerInput, bruttoBerSlider, bruttoBerSliderV));
-
 
       const felevBemenet_2 = document.getElementById("felevBemenet_2");
       const felevSlider_2 = document.getElementById("felevSlider_2");
@@ -320,4 +404,5 @@
       felevSlider_2.addEventListener("input", changeInputsValues(felevBemenet_2, felevSlider_2, felevSliderCimke_2));
     </script>
   </body>
+  <script src="config.js"></script>
 </html>

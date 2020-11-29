@@ -18,9 +18,9 @@
       </div>
       <div class="tabcontent" id="calculator_1">
         <div class="calculatorContainer">
-          <div>
+          <form>
             <div class="section-input">
-              <h3>Diákhitel tartozásod összege</h3>
+              <label class="h3-label">Diákhitel tartozásod összege</label>
               <input
                 class="number"
                 id="tartozasBemenet"
@@ -29,6 +29,9 @@
                 max="9000000"
                 step="100000"
                 value="2400000"
+                aria-valuemin="100000"
+                aria-valuemax="9000000"
+                aria-valuenow="2400000"
                 data-format="Ft"
               />
               <div class="range-wrap">
@@ -41,13 +44,16 @@
                   max="9000000"
                   step="100000"
                   value="2400000"
+                  aria-valuemin="100000"
+                  aria-valuemax="9000000"
+                  aria-valuenow="2400000"
                   data-format="Ft"
                 />
               </div>
             </div>
 
             <div class="section-input">
-              <h3>Futamidő</h3>
+              <label class="h3-label">Futamidő</label>
               <input
                 id="futamidoBemenet"
                 class="number"
@@ -57,6 +63,9 @@
                 step="1"
                 value="7"
                 data-format="Ft"
+                aria-valuemin="1"
+                aria-valuemax="15"
+                aria-valuenow="7"
               />
               <div class="range-wrap">
                 <div class="range-value" id="futamidoSliderCimke"></div>
@@ -69,24 +78,26 @@
                   step="1"
                   value="7"
                   data-format="Év"
+                  aria-valuemin="1"
+                  aria-valuemax="15"
+                  aria-valuenow="7"
                 />
               </div>
             </div>
-          </div>
+            <button type="submit" onclick="szamol()" id="kiszamolGomb" style="display: none">Kiszámolom</button>
+          </form>
           <div class="calculator-outputs">
-            <p class="font-bigger">
-              Szükséges törlesztőrészlet <br />
-              <span id="torlesztoReszletCimke"></span>
-            </p>
-            <a href="/igenyles/"  class="buton-calculator buton-calculator--blue button--calculator">Érdekel</a>
+            <h2 style="display: none" id="eredmenyek-2" tabindex="-1">Eredmények</h2>
+            <p class="font-bigger" id="Törlesztőrészlet-eredmény">Szükséges törlesztőrészlet</p>
+            <output tabindex="-1" for="Törlesztőrészlet-eredmény" id="torlesztoReszletCimke"></output>
           </div>
         </div>
       </div>
       <div class="tabcontent" id="calculator_2" style="display: none">
         <div class="calculatorContainer">
-          <div>
+          <form>
             <div class="section-input">
-              <h3>Diákhitel tartozásod összege</h3>
+              <label class="h3-label">Diákhitel tartozásod összege</label>
               <input
                 class="number"
                 id="tartozasBemenet_2"
@@ -96,6 +107,9 @@
                 step="100000"
                 value="2400000"
                 data-format="Ft"
+                aria-valuemin="100000"
+                aria-valuemax="9000000"
+                aria-valuenow="2400000"
               />
               <div class="range-wrap">
                 <div class="range-value" id="tartozasSliderCimke_2"></div>
@@ -108,12 +122,15 @@
                   step="100000"
                   value="2400000"
                   data-format="Ft"
+                  aria-valuemin="100000"
+                  aria-valuemax="9000000"
+                  aria-valuenow="2400000"
                 />
               </div>
             </div>
 
             <div class="section-input">
-              <h3>Törlesztőrészlet</h3>
+              <label class="h3-label">Törlesztőrészlet</label>
               <input
                 id="torlesztoRelszletBemenet_2"
                 class="number"
@@ -123,6 +140,9 @@
                 step="5000"
                 value="30000"
                 data-format="Ft"
+                aria-valuemin="10000"
+                aria-valuemax="200000"
+                aria-valuenow="30000"
               />
               <div class="range-wrap">
                 <div class="range-value" id="torlesztoSliderCimke_2"></div>
@@ -135,16 +155,21 @@
                   step="5000"
                   value="30000"
                   data-format="Ft"
+                  aria-valuemin="10000"
+                  aria-valuemax="200000"
+                  aria-valuenow="30000"
                 />
               </div>
             </div>
-          </div>
+            <button type="submit" onclick="szamol2()" id="kiszamolGomb-2" style="display: none">Kiszámolom</button>
+          </form>
           <div class="calculator-outputs">
-            <p class="font-bigger">
-              Futamidő <br />
-              <span id="futamidoCimke_2"></span>
-            </p>
-            <a href="/igenyles/" class="buton-calculator buton-calculator--blue button--calculator">Érdekel</a>
+            <h2 style="display: none" id="eredmenyek" tabindex="-1">Eredmények</h2>
+            <p class="font-bigger" id="futamido-eredmeny">Futamidő</p>
+            <output tabindex="-1" for="futamido-eredmeny" id="futamidoCimke_2"></output>
+            <a href="/igenyles/" id="erdekelGomb-2" class="buton-calculator buton-calculator--blue button--calculator"
+              >Érdekel</a
+            >
           </div>
         </div>
       </div>
@@ -168,7 +193,37 @@
       document.getElementById("defaultOpen").click();
     </script>
     <script>
-      var kamat = 0.0199;
+      function akadalymentesKalkulator() {
+        if (localStorage.getItem("Akadalymentesites")) {
+          document.getElementById("eredmenyek").classList.add("display");
+          document.getElementById("eredmenyek-2").classList.add("display");
+          document.getElementById("kiszamolGomb").classList.add("display");
+          document.getElementById("kiszamolGomb").style.marginTop = "20px";
+          document.getElementById("kiszamolGomb-2").classList.add("display");
+          document.getElementById("kiszamolGomb-2").style.marginTop = "20px";
+          var inputs = document.getElementsByTagName("input");
+          for (var key in inputs) {
+            if (inputs[key].type == "number") {
+              inputs[key].style.display = "none";
+            }
+          }
+        }
+      }
+      akadalymentesKalkulator();
+
+      function szamol() {
+        event.preventDefault();
+        kalkulatorKimenet();
+        var eredmeny = document.getElementById("eredmenyek");
+        eredmeny.focus();
+      }
+
+      function szamol2() {
+        event.preventDefault();
+        kalkulatorKimenet();
+        var eredmeny = document.getElementById("eredmenyek2");
+        eredmeny.focus();
+      }
 
       function kalkulatorKimenet() {
         torlesztoreszletFutamidoAlapjan();
@@ -258,4 +313,5 @@
       );
     </script>
   </body>
+  <script src="config.js"></script>
 </html>

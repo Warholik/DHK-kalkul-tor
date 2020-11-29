@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      #menu-akadalymentes {
+        display: table;
+        width: 100%;
+      }
+      #menu-akadalymentes > ul {
+        margin: 0;
+        padding: 0;
+        display: table-row;
+        background-color: #036;
+        color: #fff;
+      }
+      #menu-akadalymentes > ul > li {
+        display: table-cell;
+        width: auto;
+        text-align: center;
+        position: relative;
+      }
+      #menu-akadalymentes a,
+      #menu-akadalymentes .current {
+        display: block;
+        padding: 0.25em;
+        border-color: #e8e8e8;
+      }
+      #menu-akadalymentes a {
+        color: #fff;
+        text-decoration: none;
+        border: 1px solid #036;
+      }
+      #menu-akadalymentes a:hover,
+      #menu-akadalymentes a:focus {
+        background-color: #fff;
+        color: #036;
+        border: 1px solid #036;
+        text-decoration: underline;
+      }
+      #menu-akadalymentes .current {
+        background-color: #bbb;
+        color: #000;
+        border-color: #444;
+      }
+
+      #menu-akadalymentes > ul > li > ul {
+        display: none;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 100%;
+        padding: 0;
+        margin: 0;
+        background-color: #036;
+      }
+
+      #menu-akadalymentes > ul > li.open > ul {
+        display: block;
+      }
+
+      #menu-akadalymentes > ul > li > ul a {
+        border-bottom-width: 1px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav role="presentation" aria-label="Fő navigációs menü" id="menu-akadalymentes">
+      <ul>
+        <li><a href="#menu-akadalymentes">Főoldal</a></li>
+        <li class="has-submenu">
+          <a href="#menu-akadalymentes" aria-expanded="false" aria-haspopup="true">Felvettem</a>
+          <ul>
+            <li><a href="/felvettem-diakhitel1/">Diakhitel 1</a></li>
+            <li><a href="/felvettem-diakhitel2/">Diakhitel 2</a></li>
+            <li><a href="/felvettem-diakhitelplusz/">Diakhitel Plusz - felsőoktatás</a></li>
+            <li><a href="/felvettem-diakhitelplusz-struktura/">Diakhitel Plusz - Struktúraváltó képzés</a></li>
+          </ul>
+        </li>
+        <li><a href="/szuloknek/">Szülőknek</a></li>
+        <li><a href="https://www.diakhiteldirekt.hu/">Belépés a diakhitel direkt oldalra</a></li>
+        <li class="has-submenu">
+          <a href="#menu-akadalymentes" aria-expanded="false" aria-haspopup="true">Igénylés</a>
+          <ul>
+            <li><a href="#menu-akadalymentes">Diakhitel 1</a></li>
+            <li><a href="#menu-akadalymentes">Diakhitel 2</a></li>
+            <li><a href="#menu-akadalymentes">Diakhitel Plusz</a></li>
+          </ul>
+        </li>
+        <li><a href="#menu-akadalymentes">English page</a></li>
+      </ul>
+    </nav>
+    <script>
+      var menuItems = document.querySelectorAll("li.has-submenu");
+      Array.prototype.forEach.call(menuItems, function (el, i) {
+        el.querySelector("a").addEventListener("click", function (event) {
+          if (this.parentNode.className == "has-submenu") {
+            this.parentNode.className = "has-submenu open";
+            this.setAttribute("aria-expanded", "true");
+          } else {
+            this.parentNode.className = "has-submenu";
+            this.setAttribute("aria-expanded", "false");
+          }
+          event.preventDefault();
+          return false;
+        });
+      });
+
+    </script>
+  </body>
+</html>
