@@ -123,20 +123,21 @@
           </form>
           <div class="calculator-outputs">
             <h2 style="display: none" id="eredmenyek" tabindex="-1">Eredmények</h2>
-            <p class="font-normal">
-              Felvett hitel összege <br />
-              <span id="felvettHitelOsszegeCimke"></span>
-            </p>
-            <p class="font-normal">
-              Törlesztőrészlet az első évtől <br />
-              <span id="torlesztoreszletElsoEvCimke"></span>
-            </p>
-            <p class="font-bigger">
-              Törlesztőrészlet a <br />második évtől <br />
-              <span id="torlesztoMasodikEvtolCimke"></span>
-            </p>
-            <p class="font-bigger">Törlesztési idő <br /><span id="futamidoCimke"></span></p>
-            <a id="erdekelGomb" href="/igenyles/ " class="buton-calculator buton-calculator--blue button--calculator">Érdekel</a>
+            <p id="felvett-hite-osszege" class="font-normal">Felvett hitel összege</p>
+            <br />
+            <output tabindex="-1" for="felvett-hite-osszege" id="felvettHitelOsszegeCimke"></output>
+            <p id="torlesztoreszlet-osszege" class="font-normal">Törlesztőrészlet az első évtől</p>
+            <br />
+            <output tabindex="-1" for="torlesztoreszlet-osszege" id="torlesztoreszletElsoEvCimke"></output>
+            <p id="masodik-ev-torleszto" class="font-bigger">Törlesztőrészlet a <br />második évtől</p>
+            <br />
+            <output tabindex="-1" for="masodik-ev-torleszto" id="torlesztoMasodikEvtolCimke"></output>
+            <p id="torlesztes-ido" class="font-bigger">Törlesztési idő</p>
+            <br />
+            <output tabindex="-1" for="torlesztes-ido" id="futamidoCimke"></output>
+            <a id="erdekelGomb" href="/igenyles/ " class="buton-calculator buton-calculator--blue button--calculator"
+              >Érdekel</a
+            >
           </div>
         </div>
       </div>
@@ -243,15 +244,18 @@
           </form>
           <div class="calculator-outputs">
             <h2 style="display: none" id="eredmenyek-2" tabindex="-1">Eredmények</h2>
-            <p class="font-normal">
-              Felvett hitel összege<br />
-              <span id="felvettHitelOsszegeCimke_2"></span>
-            </p>
-            <p class="font-bigger">
-              Törlesztőrészlet <br />
-              <span id="torlesztoReszletCimke_2"></span>
-            </p> <br>
-            <a id="erdekelGomb-2" href="/igenyles/ " class="buton-calculator buton-calculator--blue button--calculator">Érdekel</a>
+            <br />
+            <p class="font-normal" id="felvett-hite-osszege">Felvett hitel összege</p>
+            <br />
+            <output tabindex="-1" for="felvett-hite-osszege" id="felvettHitelOsszegeCimke_2"></output>
+            <br />
+            <p id="torlesztoreszlet-eredmeny" class="font-bigger">Törlesztőrészlet</p>
+            <br />
+            <output tabindex="-1" for="torlesztoreszlet-eredmeny" id="torlesztoReszletCimke_2"></output>
+            <br />
+            <a id="erdekelGomb-2" href="/igenyles/ " class="buton-calculator buton-calculator--blue button--calculator"
+              >Érdekel</a
+            >
           </div>
         </div>
       </div>
@@ -303,14 +307,14 @@
 
       function szamol() {
         event.preventDefault();
-        kalkulatorKimenet()
+        kalkulatorKimenet();
         var eredmeny = document.getElementById("eredmenyek");
         eredmeny.focus();
       }
 
       function szamol2() {
         event.preventDefault();
-        kalkulatorKimenet()
+        kalkulatorKimenet();
         var eredmeny = document.getElementById("eredmenyek-2");
         eredmeny.focus();
       }
@@ -336,18 +340,63 @@
       //Félévenként felvett összegéhez tartozó slider labelje
       const tartozasSliderCimke = document.getElementById("tartozasSliderCimke");
 
-      document.addEventListener(
-        "DOMContentLoaded",
-        changeInputsValues(tartozasInput, tartozasSlider, tartozasSliderCimke, true),
-      );
-      tartozasSlider.addEventListener(
-        "input",
-        changeInputsValues(tartozasInput, tartozasSlider, tartozasSliderCimke, true),
-      );
-      tartozasInput.addEventListener(
-        "change",
-        changeInputsValues(tartozasInput, tartozasSlider, tartozasSliderCimke, true),
-      );
+      if (localStorage.getItem("Akadalymentesites") === null) {
+        document.addEventListener(
+          "DOMContentLoaded",
+          changeInputsValues(tartozasInput, tartozasSlider, tartozasSliderCimke, true),
+        );
+        tartozasSlider.addEventListener(
+          "input",
+          changeInputsValues(tartozasInput, tartozasSlider, tartozasSliderCimke, true),
+        );
+        tartozasInput.addEventListener(
+          "change",
+          changeInputsValues(tartozasInput, tartozasSlider, tartozasSliderCimke, true),
+        );
+
+        document.addEventListener(
+          "DOMContentLoaded",
+          changeInputsValues(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2, true),
+        );
+        tartozasSlider_2.addEventListener(
+          "input",
+          changeInputsValues(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2, true),
+        );
+        tartozasInput_2.addEventListener(
+          "change",
+          changeInputsValues(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2, true),
+        );
+      } else {
+        document.getElementById("tartozasSlider").step = 10000;
+        document.getElementById("tartozasSlider").min = 20000;
+        document.getElementById("tartozasSlider_2").step = 10000;
+        document.getElementById("tartozasSlider_2").min = 20000;
+        document.addEventListener(
+          "DOMContentLoaded",
+          changeInputsValues(tartozasInput, tartozasSlider, tartozasSliderCimke),
+        );
+        tartozasSlider.addEventListener(
+          "input",
+          changeInputsValues(tartozasInput, tartozasSlider, tartozasSliderCimke),
+        );
+        tartozasInput.addEventListener(
+          "change",
+          changeInputsValues(tartozasInput, tartozasSlider, tartozasSliderCimke),
+        );
+
+        document.addEventListener(
+          "DOMContentLoaded",
+          changeInputsValues(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2),
+        );
+        tartozasSlider_2.addEventListener(
+          "input",
+          changeInputsValues(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2),
+        );
+        tartozasInput_2.addEventListener(
+          "change",
+          changeInputsValues(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2),
+        );
+      }
 
       document.addEventListener("DOMContentLoaded", changeInputsValues(felevInput, felevSlider, felevSliderCimke));
       felevSlider.addEventListener("input", changeInputsValues(felevInput, felevSlider, felevSliderCimke));
@@ -372,19 +421,6 @@
       const tartozasInput_2 = document.getElementById("tartozasInput_2");
       const tartozasSlider_2 = document.getElementById("tartozasSlider_2");
       const tartozasSliderCimke_2 = document.getElementById("tartozasSliderCimke_2");
-
-      document.addEventListener(
-        "DOMContentLoaded",
-        changeInputsValues(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2, true),
-      );
-      tartozasSlider_2.addEventListener(
-        "input",
-        changeInputsValues(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2, true),
-      );
-      tartozasInput_2.addEventListener(
-        "change",
-        changeInputsValues(tartozasInput_2, tartozasSlider_2, tartozasSliderCimke_2, true),
-      );
 
       document.addEventListener(
         "DOMContentLoaded",

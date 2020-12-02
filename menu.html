@@ -62,7 +62,11 @@
         </a>
       </div>
       <div class="menu-buttons">
-        <a class="menu-button menu-button--blue" href="https://www.diakhiteldirekt.hu/"> BELÉPÉS</a>
+        <form action="https://www.diakhiteldirekt.hu/login" method="post" autocomplete="off">
+          <input name="loginName" style="display: none" />
+          <input name="password" style="display: none" />
+          <input type="submit" class="menu-button menu-button--blue" value="BELÉPÉS" title="Belépés" />
+        </form>
         <a class="menu-button menu-button--green" onclick="lenyiloMenu()"> IGÉNYLÉS</a>
         <div class="menu-dropdown" id="menu-dropdown">
           <a href="/igenyles/"
@@ -103,7 +107,11 @@
         <img src="/wp-content/uploads/2020/11/disabled.svg" alt="Akadálymentesített felület" />
       </a>
       <div class="menu-buttons">
-        <a class="menu-button menu-button--blue" href="https://www.diakhiteldirekt.hu/"> BELÉPÉS</a>
+        <form action="https://www.diakhiteldirekt.hu/login" method="post" autocomplete="off">
+          <input name="loginName" style="display: none" />
+          <input name="password" style="display: none" />
+          <input type="submit" class="menu-button menu-button--blue" value="BELÉPÉS" title="Belépés" />
+        </form>
         <a class="menu-button menu-button--green" onclick="lenyiloMenu()"> IGÉNYLÉS</a>
         <div class="menu-dropdown" id="menu-dropdown2">
           <a href="/igenyles/"
@@ -169,7 +177,13 @@
           </ul>
         </li>
         <li><a href="/szuloknek-akadalymentes">Szülőknek</a></li>
-        <li><a href="https://www.diakhiteldirekt.hu/">Belépés a diákhitel direkt oldalra</a></li>
+        <li>
+          <form action="https://www.diakhiteldirekt.hu/login" method="post" autocomplete="off">
+            <input name="loginName" style="display: none" />
+            <input name="password" style="display: none" />
+            <input type="submit" class="belepes-gomb" value="Belépés a diákhitel direkt oldalra" title="Belépés" />
+          </form>
+        </li>
         <li class="dropdown has-submenu">
           <a class="dropdown-toggle" onClick="toggleDropdown(this)" aria-expanded="false" aria-haspopup="true" href="#"
             >Igénylés
@@ -181,7 +195,7 @@
           </ul>
         </li>
         <li><a href="/english-page-akadalymentesitett/" target="_blank">English page</a></li>
-        <li><a href="#" onClick="AkadalymentesitesBeallitas(event) ">Normál nézet</a></li>
+        <li><a href="#" onClick="AkadalymentesitesBeallitas(event) ">Alap nézet</a></li>
       </ul>
     </nav>
     <script>
@@ -228,6 +242,15 @@
         }
       }
 
+      /**
+       * Az akadalymentesített oldal ellenőrzésére szolgáló függvény
+       * - Ha az oldalnak van akadálymentesített párlya akkor átirányítjuk oda
+       * - Ha nincs akkor elvégezzük az oldal akadálymentesítését
+       * - - Előhívjuk az akadálymentesített menüt
+       * - - Kinyitjuk a harmonika elemeket
+       * - - Átírjuk a linkeket a footerben
+       * - - Az akadálymentesített menüt felkészítük a felolvasó program számára
+       */
       function akadalymentesOldalEllenorzes() {
         if (localStorage.getItem("Akadalymentesites")) {
           AkadalymentesOldalraIranyitas();
@@ -238,9 +261,7 @@
           //Az akadálymentesített menüt előhozzuk
           document.getElementById("menu-akadalymentes").classList.add("display");
 
-          harmonikaElemekKinyitasa();
-          linkekAtirasa();
-
+          //Az akadálymentesített menüt felkészítük a felolvasó program számára
           var menuItems = document.querySelectorAll("li.has-submenu");
           Array.prototype.forEach.call(menuItems, function (el, i) {
             el.querySelector("a").addEventListener("click", function (event) {
@@ -258,20 +279,27 @@
         }
       }
 
-      /*
-       *
+
+      /**
+       * Beállítjuk az oldalt a megfelelő nézetbe
+       * - Ha sima volt eddig akkor akadálymentesítettnek
+       * - Ha akadáylmentesített volt akkor simára
        */
       function AkadalymentesitesBeallitas(event) {
         event.preventDefault();
         if (localStorage.getItem("Akadalymentesites") === null) {
           localStorage.setItem("Akadalymentesites", "1");
           akadalymentesOldalEllenorzes();
+          //Ezt a két függvényt a footer tartalmazza
+          harmonikaElemekKinyitasa();
+          linkekAtirasa();
         } else {
           localStorage.removeItem("Akadalymentesites");
           var aktualisLink = window.location.pathname;
           aktualisLink = aktualisLink.substring(0, aktualisLink.length - 20);
           aktualisLink += "/";
-          console.log(aktualisLink);
+
+          //elvégezzük az átirányítást az erdeti oldalra ha szükséges
           if (akadalymentesitettLinkeParok.hasOwnProperty(aktualisLink)) {
             window.location.href = aktualisLink;
           }

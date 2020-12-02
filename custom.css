@@ -130,6 +130,10 @@ h2 {
   margin-bottom: 0px;
 }
 
+.et_pb_blurb_content p:last-of-type{
+  padding-bottom: 0px;
+}
+
 .without-icon .tooltiptext::after,
 .blurb-with-info-felsorolas .tooltiptext::after {
   left: calc(100% - 25px);
@@ -785,6 +789,7 @@ circle {
   transition: box-shadow 0.2s;
   cursor: pointer;
   text-decoration: none;
+  border: 0;
 }
 
 .menu-button:hover {
@@ -1211,11 +1216,14 @@ circle {
 .menu-layout-akadalymentes a {
   color: #000;
   text-decoration-line: none;
+  border: solid 1px;
+  border-color: transparent;
 }
 
 .menu-layout-akadalymentes a:hover,
 .menu-layout-akadalymentes a:focus {
   border: solid 1px;
+  border-color: black;
 }
 
 .menu-akadalymentes {
@@ -1620,11 +1628,21 @@ circle {
 }
 
 /* Akadalymentesítéses dolgok*/
-.calculator-outputs p:focus,
-.calculator-outputs h2:focus,
-.calculator-outputs output:focus {
+.akadalymentes .calculator-outputs p:focus,
+.akadalymentes .calculator-outputs h2:focus,
+.akadalymentes .calculator-outputs output:focus {
   background-color: black;
   color: white;
+}
+
+.akadalymentes .calculator-outputs output {
+  color: black;
+}
+
+.calculator-outputs p:focus,
+.calculator-outputs h2:focus,
+.calculator-outputs output {
+  color: #1eade8;
 }
 
 .akadalymentes button {
@@ -1663,4 +1681,24 @@ circle {
 
 .akadalymentes #main-content a {
   color: blue !important;
+}
+
+.akadalymentes .calculatorContainer .wpforms-container-full {
+  margin: 0;
+}
+
+.akadalymentes .belepes-gomb {
+  color: #000;
+  text-decoration-line: none;
+  border: solid 1px;
+  background: none;
+  border-color: transparent;
+  color: #000000;
+  font-family: sans-serif;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.akadalymentes .belepes-gomb:hover {
+  border: solid 1px black;
 }

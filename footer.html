@@ -34,8 +34,8 @@
         </li>
         <li>
           <ul class="footer__menupontok">
-            <li><a href="/elerhetoseg" class="footer__link">Elérhetőségek</a></li>
-            <li><a href="/rolunk" class="footer__link">Rólunk</a></li>
+            <li><a href="/elerhetoseg/" class="footer__link">Elérhetőségek</a></li>
+            <li><a href="/rolunk/" class="footer__link">Rólunk</a></li>
             <li><a href="/kozerdeku-adatok" class="footer__link">Közérdekű adatok</a></li>
             <li><a href="/egyeb-kozzetetelek" class="footer__link">Egyéb közzétételek</a></li>
           </ul>
@@ -64,6 +64,10 @@
     </nav>
 
     <script>
+      /*
+       * Amennyiben az oldal akadálymentesített módban van úgy a footerben átírjuk akadálymentesítettre a linkeket
+       * Továbbá a harmonika elemeket kinyitjuk az oldalon
+       */
       function linkekAtirasa() {
         if (localStorage.getItem("Akadalymentesites")) {
           harmonikaElemekKinyitasa();
@@ -71,24 +75,31 @@
           document.getElementById("oldal-teteje-gomb").style.display = "none";
           document.getElementById("footer-sor").style.backgroundColor = "black";
           for (var i = 0; i < anchors.length; ++i) {
-            if (anchors[i].href.includes("rolunk") || anchors[i].href.includes("elerhetoseg")) {
-              anchors[i].href += "-akadalymentesitett";
+            if (anchors[i].href.includes("rolunk")) {
+              anchors[i].href = "rolunk-akadalymentesitett/";
+            } else if (anchors[i].href.includes("elerhetoseg")) {
+              anchors[i].href = "elerhetoseg-akadalymentesitett/";
             }
           }
         }
       }
 
       function harmonikaElemekKinyitasa() {
-        jQuery(function ($) {
-          $(".et_pb_accordion .et_pb_toggle_close").addClass("et_pb_toggle_open").removeClass("et_pb_toggle_close");
-          $(".et_pb_accordion .et_pb_toggle").click(function () {
-            $this = $(this);
-            setTimeout(function () {
-              $this.closest(".et_pb_accordion").removeClass("et_pb_accordion_toggling");
-            }, 700);
+        if (localStorage.getItem("Akadalymentesites")) {
+          jQuery(function ($) {
+            $(".et_pb_accordion .et_pb_toggle_close").addClass("et_pb_toggle_open").removeClass("et_pb_toggle_close");
+            $(".et_pb_accordion .et_pb_toggle").click(function () {
+              $this = $(this);
+              setTimeout(function () {
+                $this.closest(".et_pb_accordion").removeClass("et_pb_accordion_toggling");
+              }, 700);
+            });
           });
-        });
+        }
       }
+
+      //Ezt a két függvényt a footer tartalmazza
+      harmonikaElemekKinyitasa();
       linkekAtirasa();
     </script>
   </body>
